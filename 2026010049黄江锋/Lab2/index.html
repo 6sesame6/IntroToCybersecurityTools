@@ -3,947 +3,615 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大学生网络安全常识</title>
+<title>崩坏：星穹铁道 · 星际和平漫游指南</title>
 <style>
   :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --ink:#1b2430;
-    --ink-2:#4a5765;
-    --ink-3:#7b8899;
-    --line:#e3e8f0;
-    --blue:#2563eb;
-    --blue-soft:#eaf1ff;
-    --green:#0f9d66;
-    --green-soft:#e8f7f0;
-    --amber:#d97706;
-    --amber-soft:#fdf4e3;
-    --red:#dc2626;
-    --red-soft:#fdecec;
-    --violet:#7c3aed;
-    --violet-soft:#f2ecfe;
-    --radius:16px;
-    --shadow:0 1px 2px rgba(16,32,64,.06),0 8px 24px rgba(16,32,64,.06);
+    --bg:#070b16;
+    --bg2:#0c1224;
+    --panel:rgba(18,26,48,.72);
+    --line:rgba(122,168,255,.22);
+    --line2:rgba(122,168,255,.45);
+    --gold:#f2c14e;
+    --gold-soft:#ffe6a3;
+    --cyan:#5fe3ff;
+    --violet:#a98bff;
+    --txt:#e8eefc;
+    --dim:#93a4c8;
+    --rose:#ff7a93;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
-    margin:0;
-    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Segoe UI",system-ui,-apple-system,sans-serif;
     background:var(--bg);
-    color:var(--ink);
-    line-height:1.75;
-    -webkit-font-smoothing:antialiased;
-    font-size:16px;
+    color:var(--txt);
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.85;
+    overflow-x:hidden;
   }
-  a{color:var(--blue);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
 
-  /* ---------- 顶部导航 ---------- */
-  header.top{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.88);
-    backdrop-filter:blur(10px);
+  /* ===== 星空背景（纯 CSS） ===== */
+  .stars,.stars2,.stars3{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars{
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.4px 1.4px at 130px 90px,rgba(255,255,255,.85),transparent),
+      radial-gradient(1.2px 1.2px at 260px 40px,rgba(200,225,255,.9),transparent),
+      radial-gradient(1.8px 1.8px at 330px 180px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 90px 220px,rgba(255,255,255,.75),transparent),
+      radial-gradient(1.5px 1.5px at 400px 120px,rgba(255,235,190,.9),transparent);
+    background-size:460px 300px;
+    opacity:.55;
+    animation:drift 140s linear infinite;
+  }
+  .stars2{
+    background-image:
+      radial-gradient(1px 1px at 60px 60px,#fff,transparent),
+      radial-gradient(1px 1px at 200px 150px,rgba(255,255,255,.7),transparent),
+      radial-gradient(1.3px 1.3px at 320px 250px,rgba(160,210,255,.9),transparent);
+    background-size:380px 380px;
+    opacity:.4;
+    animation:drift 220s linear infinite reverse;
+  }
+  .stars3{
+    background:radial-gradient(circle at 78% 12%,rgba(95,227,255,.14),transparent 42%),
+               radial-gradient(circle at 12% 72%,rgba(169,139,255,.16),transparent 46%),
+               radial-gradient(circle at 50% 108%,rgba(242,193,78,.10),transparent 50%);
+    z-index:0;
+  }
+  @keyframes drift{
+    from{background-position:0 0}
+    to{background-position:460px 900px}
+  }
+
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ===== 头部 ===== */
+  header{
+    position:relative;
+    padding:88px 0 64px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;left:50%;top:-260px;transform:translateX(-50%);
+    width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(95,227,255,.16),rgba(169,139,255,.07) 45%,transparent 68%);
+    pointer-events:none;
+  }
+  .badge{
+    display:inline-block;
+    font-size:12px;letter-spacing:.42em;text-indent:.42em;
+    color:var(--gold);
+    border:1px solid rgba(242,193,78,.4);
+    border-radius:999px;
+    padding:7px 20px;
+    margin-bottom:26px;
+    background:rgba(242,193,78,.06);
+  }
+  header h1{
+    font-size:clamp(34px,6.2vw,62px);
+    letter-spacing:.05em;
+    font-weight:800;
+    background:linear-gradient(100deg,#fff 8%,var(--gold-soft) 38%,var(--cyan) 68%,var(--violet) 92%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+    text-shadow:0 0 42px rgba(95,227,255,.18);
+  }
+  .sub{
+    color:var(--dim);
+    margin-top:16px;
+    font-size:15px;
+    letter-spacing:.22em;
+  }
+  .sub b{color:var(--cyan);font-weight:600}
+  .head-tag{
+    margin-top:30px;
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  }
+  .head-tag span{
+    font-size:12.5px;color:#cfdcf7;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:6px;padding:5px 13px;
+    backdrop-filter:blur(6px);
+  }
+
+  /* ===== 导航 ===== */
+  nav{
+    position:sticky;top:0;z-index:20;
+    background:rgba(7,11,22,.86);
+    backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
   }
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:.2px;}
-  .brand .mark{
-    width:30px;height:30px;border-radius:9px;flex:0 0 30px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    display:flex;align-items:center;justify-content:center;
+  nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:11px;padding-bottom:11px}
+  nav a{
+    color:var(--dim);text-decoration:none;font-size:14px;
+    padding:6px 15px;border-radius:999px;white-space:nowrap;
+    border:1px solid transparent;transition:.22s;
   }
-  nav.links{display:flex;gap:6px;flex-wrap:wrap;}
-  nav.links a{
-    color:var(--ink-2);font-size:14.5px;padding:7px 13px;border-radius:999px;
-    transition:background .18s,color .18s;white-space:nowrap;
-  }
-  nav.links a:hover{background:var(--blue-soft);color:var(--blue);text-decoration:none;}
+  nav a:hover{color:var(--txt);border-color:var(--line2);background:rgba(95,227,255,.08)}
 
-  /* ---------- 首屏 ---------- */
-  .hero{
-    background:
-      radial-gradient(1100px 420px at 12% -20%,rgba(37,99,235,.16),transparent 62%),
-      radial-gradient(900px 380px at 92% 0%,rgba(124,58,237,.14),transparent 60%),
-      #ffffff;
-    border-bottom:1px solid var(--line);
-    padding:64px 0 56px;
+  /* ===== 区块 ===== */
+  section{padding:74px 0 10px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  .sec-no{
+    font-size:13px;font-weight:700;letter-spacing:.2em;
+    color:var(--gold);
+    border-left:3px solid var(--gold);
+    padding-left:11px;
   }
-  .hero-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:44px;align-items:center;}
-  .tagline{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--blue-soft);color:var(--blue);
-    font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;
-    margin-bottom:18px;
+  .sec-head h2{
+    font-size:clamp(23px,3.6vw,33px);font-weight:800;letter-spacing:.03em;
   }
-  .tagline .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);display:inline-block;}
-  h1{font-size:40px;line-height:1.25;margin:0 0 16px;letter-spacing:-.5px;}
-  h1 em{font-style:normal;color:var(--blue);}
-  .hero p.lead{font-size:16.5px;color:var(--ink-2);margin:0 0 26px;max-width:640px;}
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:11px 22px;border-radius:11px;font-size:15px;font-weight:600;
-    border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s;
-    font-family:inherit;
-  }
-  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.28);}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(37,99,235,.34);text-decoration:none;color:#fff;}
-  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line);}
-  .btn-ghost:hover{border-color:#c9d4e4;background:#fbfcfe;text-decoration:none;}
-
-  .shield-card{
-    background:var(--card);border:1px solid var(--line);border-radius:22px;
-    padding:26px 26px 20px;box-shadow:var(--shadow);
-  }
-  .shield-card h3{margin:0 0 4px;font-size:15.5px;}
-  .shield-card .sub{font-size:13px;color:var(--ink-3);margin:0 0 16px;}
-  .score-row{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
-  .score-num{font-size:44px;font-weight:800;letter-spacing:-1px;color:var(--blue);line-height:1;}
-  .score-total{font-size:14px;color:var(--ink-3);}
-  .bar{height:9px;border-radius:99px;background:#eef1f6;overflow:hidden;}
-  .bar span{display:block;height:100%;width:37%;border-radius:99px;background:linear-gradient(90deg,#2563eb,#7c3aed);}
-  .mini-list{list-style:none;margin:16px 0 0;padding:0;font-size:14px;color:var(--ink-2);}
-  .mini-list li{display:flex;gap:9px;align-items:flex-start;padding:5px 0;}
-  .mini-list li b{color:var(--ink);font-weight:600;}
-
-  /* ---------- 通用区块 ---------- */
-  section{padding:58px 0;border-bottom:1px solid var(--line);}
-  section:nth-of-type(even){background:#fbfcfe;}
-  .sec-head{margin-bottom:30px;}
-  .sec-kicker{
-    font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
-    color:var(--ink-3);margin-bottom:8px;
-  }
-  h2{font-size:28px;margin:0 0 12px;letter-spacing:-.3px;}
-  .sec-head p{margin:0;color:var(--ink-2);max-width:760px;}
-  h3{font-size:18px;margin:0 0 10px;}
-  h4{font-size:15.5px;margin:0 0 8px;}
-
-  .grid{display:grid;gap:18px;}
-  .g2{grid-template-columns:repeat(2,1fr);}
-  .g3{grid-template-columns:repeat(3,1fr);}
-  .g4{grid-template-columns:repeat(4,1fr);}
+  .sec-desc{color:var(--dim);font-size:14.5px;margin-bottom:34px;max-width:820px}
 
   .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:22px;box-shadow:var(--shadow);
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px;
+    backdrop-filter:blur(8px);
+    transition:.28s;
   }
-  .card p{margin:0;color:var(--ink-2);font-size:14.5px;}
-  .card p + p{margin-top:8px;}
+  .card:hover{border-color:var(--line2);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.4)}
+  .card h3{
+    font-size:18px;margin-bottom:12px;letter-spacing:.04em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .card h3::before{
+    content:"";width:8px;height:8px;border-radius:50%;
+    background:var(--cyan);box-shadow:0 0 12px var(--cyan);
+    flex:none;
+  }
+  .card p{font-size:14.8px;color:#cfdaf3}
+  .card p+p{margin-top:11px}
 
-  .icon{
-    width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    margin-bottom:14px;font-size:20px;
-  }
-  .i-blue{background:var(--blue-soft);color:var(--blue);}
-  .i-green{background:var(--green-soft);color:var(--green);}
-  .i-amber{background:var(--amber-soft);color:var(--amber);}
-  .i-red{background:var(--red-soft);color:var(--red);}
-  .i-violet{background:var(--violet-soft);color:var(--violet);}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:20px}
 
-  ul.clean{margin:10px 0 0;padding-left:19px;color:var(--ink-2);font-size:14.5px;}
-  ul.clean li{margin:5px 0;}
-  ul.clean li b{color:var(--ink);}
+  /* ===== 时间轴 ===== */
+  .timeline{position:relative;margin-top:8px;padding-left:34px}
+  .timeline::before{
+    content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--cyan),var(--violet),var(--gold));
+    opacity:.5;border-radius:2px;
+  }
+  .tl-item{position:relative;margin-bottom:28px}
+  .tl-item::before{
+    content:"";position:absolute;left:-30px;top:8px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--cyan);
+    box-shadow:0 0 14px rgba(95,227,255,.7);
+  }
+  .tl-item .tl-title{font-weight:700;font-size:16.5px;color:#fff;letter-spacing:.03em}
+  .tl-item .tl-sub{font-size:12.5px;color:var(--gold);letter-spacing:.14em;margin:3px 0 7px}
+  .tl-item p{font-size:14.6px;color:#c6d3ee}
 
-  .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
-  .pill{font-size:12.5px;padding:4px 11px;border-radius:999px;font-weight:600;}
-  .p-red{background:var(--red-soft);color:var(--red);}
-  .p-green{background:var(--green-soft);color:var(--green);}
-  .p-blue{background:var(--blue-soft);color:var(--blue);}
-  .p-amber{background:var(--amber-soft);color:var(--amber);}
-
-  /* ---------- 表格 ---------- */
-  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;}
-  table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px;}
-  th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
-  th{background:#f7f9fd;font-weight:700;color:var(--ink);white-space:nowrap;}
-  tr:last-child td{border-bottom:none;}
-  td code{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:13px;background:#f2f5fa;padding:2px 6px;border-radius:5px;color:#334155;}
-
-  /* ---------- 密码强度检测 ---------- */
-  .checker{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:26px;box-shadow:var(--shadow);
+  /* ===== 角色卡 ===== */
+  .char{
+    background:linear-gradient(160deg,rgba(22,32,58,.9),rgba(12,18,36,.9));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
   }
-  .field{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
-  .field input{
-    flex:1 1 260px;min-width:0;padding:12px 14px;border-radius:11px;
-    border:1px solid var(--line);font-size:15px;font-family:ui-monospace,Consolas,monospace;
-    background:#fbfcfe;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s;
+  .char::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 100% 0%,var(--accent,rgba(95,227,255,.18)),transparent 62%);
+    opacity:.9;
   }
-  .field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12);background:#fff;}
-  .meter{height:8px;border-radius:99px;background:#eef1f6;overflow:hidden;margin-bottom:10px;display:flex;gap:4px;}
-  .meter i{flex:1;background:#eef1f6;border-radius:99px;transition:background .25s;}
-  .verdict{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14.5px;}
-  .verdict .label{font-weight:700;}
-  .tips{margin:14px 0 0;padding:0;list-style:none;font-size:14px;color:var(--ink-2);}
-  .tips li{display:flex;gap:9px;padding:4px 0;align-items:flex-start;}
-  .tips li::before{content:"✓";color:var(--green);font-weight:700;}
-  .tips li.bad::before{content:"×";color:var(--red);}
-  .hint{font-size:13px;color:var(--ink-3);margin-top:12px;}
-
-  /* ---------- 钓鱼演练 ---------- */
-  .phish{display:grid;grid-template-columns:1fr;gap:16px;}
-  .msg{
-    border:1px solid var(--line);border-radius:var(--radius);background:#fff;
-    overflow:hidden;box-shadow:var(--shadow);
-  }
-  .msg-head{
-    display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);
-    background:#fafbfe;
-  }
-  .msg-avatar{
-    width:38px;height:38px;border-radius:50%;flex:0 0 38px;display:flex;align-items:center;justify-content:center;
-    font-size:16px;font-weight:700;color:#fff;background:#94a3b8;
-  }
-  .msg-who{flex:1;min-width:0;}
-  .msg-who .name{font-weight:700;font-size:14.5px;}
-  .msg-who .addr{font-size:12.5px;color:var(--ink-3);font-family:ui-monospace,Consolas,monospace;word-break:break-all;}
-  .msg-body{padding:16px 18px;font-size:14.5px;color:var(--ink-2);}
-  .msg-body .subject{font-weight:700;color:var(--ink);margin-bottom:6px;font-size:15px;}
-  .msg-body .link{color:var(--blue);word-break:break-all;font-family:ui-monospace,Consolas,monospace;font-size:13px;}
-  .msg-actions{display:flex;gap:10px;padding:0 18px 18px;flex-wrap:wrap;}
-  .msg-actions button{
-    font-family:inherit;font-size:14px;font-weight:600;padding:9px 18px;border-radius:10px;
-    border:1px solid var(--line);background:#fff;cursor:pointer;transition:.16s;color:var(--ink);
-  }
-  .msg-actions button:hover{border-color:#c9d4e4;background:#f8fafd;}
-  .msg-actions button.pick{border-color:var(--blue);color:var(--blue);}
-  .verdict-box{
-    margin:0 18px 18px;padding:13px 16px;border-radius:12px;font-size:14px;display:none;
-  }
-  .verdict-box.show{display:block;}
-  .v-ok{background:var(--green-soft);color:#0a6b47;}
-  .v-bad{background:var(--red-soft);color:#9c1c1c;}
-  .verdict-box b{display:block;margin-bottom:4px;font-size:14.5px;}
-  .quiz-bar{
-    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-    margin-top:6px;font-size:14.5px;color:var(--ink-2);
-  }
-  .quiz-bar strong{color:var(--ink);}
-  .btn-sm{padding:9px 18px;font-size:14px;border-radius:10px;}
-
-  /* ---------- 清单 ---------- */
-  .checklist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  .checklist li{
-    display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--line);
-    border-radius:12px;padding:13px 15px;font-size:14.5px;color:var(--ink-2);
-    transition:border-color .16s,box-shadow .16s;
-  }
-  .checklist li:hover{border-color:#cfdcee;box-shadow:0 4px 14px rgba(16,32,64,.06);}
-  .checklist .box{
-    width:20px;height:20px;flex:0 0 20px;border-radius:6px;border:2px solid #c3d0e3;
-    display:flex;align-items:center;justify-content:center;margin-top:2px;cursor:pointer;
-    transition:.16s;background:#fff;
-  }
-  .checklist li.done .box{background:var(--green);border-color:var(--green);}
-  .checklist li.done .box::after{content:"✓";color:#fff;font-size:13px;font-weight:700;}
-  .checklist li.done{color:var(--ink-3);text-decoration:line-through;}
-
-  /* ---------- 紧急处置 ---------- */
-  .steps{counter-reset:s;list-style:none;margin:0;padding:0;}
-  .steps li{
-    position:relative;padding:0 0 20px 52px;border-left:2px solid var(--line);margin-left:16px;
-  }
-  .steps li:last-child{border-left-color:transparent;padding-bottom:0;}
-  .steps li::before{
-    counter-increment:s;content:counter(s);
-    position:absolute;left:-17px;top:-2px;width:32px;height:32px;border-radius:50%;
-    background:var(--blue);color:#fff;font-weight:700;font-size:14px;
+  .char:hover{transform:translateY(-5px);border-color:var(--line2);box-shadow:0 16px 44px rgba(0,0,0,.5)}
+  .char>*{position:relative}
+  .avatar{
+    width:58px;height:58px;border-radius:14px;
     display:flex;align-items:center;justify-content:center;
+    font-size:25px;font-weight:800;color:#0a0f1e;
+    margin-bottom:14px;
+    background:linear-gradient(140deg,var(--a1),var(--a2));
+    box-shadow:0 0 24px var(--accent,rgba(95,227,255,.5));
   }
-  .steps h4{margin:2px 0 5px;font-size:15.5px;}
-  .steps p{margin:0;color:var(--ink-2);font-size:14.5px;}
+  .char h4{font-size:18px;letter-spacing:.04em}
+  .char .en{font-size:11.5px;color:var(--dim);letter-spacing:.16em;margin:2px 0 10px}
+  .char .path{
+    display:inline-block;font-size:11.5px;padding:3px 10px;border-radius:5px;
+    margin-bottom:11px;letter-spacing:.06em;
+    border:1px solid var(--line2);color:var(--gold-soft);
+    background:rgba(242,193,78,.07);
+  }
+  .char p{font-size:14.2px;color:#c9d5f0}
+  .char .quote{
+    margin-top:13px;padding-top:11px;font-size:13.4px;color:var(--dim);
+    border-top:1px dashed var(--line);font-style:italic;
+  }
 
-  /* ---------- 页脚 ---------- */
-  footer{padding:40px 0 56px;background:#fff;}
-  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;font-size:13.5px;color:var(--ink-3);}
-  .foot .kbd{font-family:ui-monospace,Consolas,monospace;background:#f2f5fa;padding:2px 7px;border-radius:6px;}
+  /* ===== 名词表 ===== */
+  .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .term{
+    border-left:3px solid var(--violet);
+    background:rgba(169,139,255,.06);
+    border-radius:0 10px 10px 0;
+    padding:15px 18px;
+    transition:.25s;
+  }
+  .term:hover{background:rgba(169,139,255,.13);transform:translateX(4px)}
+  .term b{color:var(--gold-soft);font-size:15px;letter-spacing:.04em}
+  .term span{display:block;font-size:13.8px;color:#c3d0ec;margin-top:5px}
 
+  /* ===== 星轨 SVG 装饰 ===== */
+  .orbit-box{
+    margin:36px auto 8px;display:block;width:100%;max-width:620px;height:auto;
+  }
+  .orbit-ring{transform-origin:310px 170px;animation:spin 34s linear infinite}
+  .orbit-ring.r2{animation-duration:52s;animation-direction:reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ===== 数据条 ===== */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:30px}
+  .stat{
+    text-align:center;padding:18px 10px;border-radius:12px;
+    background:var(--panel);border:1px solid var(--line);
+  }
+  .stat b{display:block;font-size:24px;color:var(--cyan);letter-spacing:.02em}
+  .stat span{font-size:12.5px;color:var(--dim);letter-spacing:.1em}
+
+  /* ===== 提示块 ===== */
   .note{
-    border-left:4px solid var(--blue);background:var(--blue-soft);border-radius:0 12px 12px 0;
-    padding:14px 18px;font-size:14.5px;color:#1e40af;margin-top:18px;
+    margin-top:30px;padding:18px 22px;border-radius:12px;
+    background:linear-gradient(100deg,rgba(242,193,78,.09),rgba(255,122,147,.05));
+    border:1px solid rgba(242,193,78,.3);
+    font-size:14.4px;color:#e2ddc9;
   }
-  .note.warn{border-color:var(--amber);background:var(--amber-soft);color:#92400e;}
-  .note b{color:inherit;}
+  .note b{color:var(--gold)}
 
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;gap:30px;}
-    h1{font-size:31px;}
-    .g3,.g4{grid-template-columns:repeat(2,1fr);}
-    .checklist{grid-template-columns:1fr;}
+  /* ===== 页脚 ===== */
+  footer{
+    margin-top:80px;padding:34px 0 46px;
+    border-top:1px solid var(--line);
+    text-align:center;font-size:13px;color:var(--dim);letter-spacing:.06em;
   }
-  @media (max-width:620px){
-    .g2,.g3,.g4{grid-template-columns:1fr;}
-    h2{font-size:23px;}
-    section{padding:44px 0;}
-    .hero{padding:46px 0 40px;}
+  footer .line{
+    display:block;margin:0 auto 16px;width:110px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  }
+
+  /* ===== 入场动画 ===== */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.on{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    header{padding:58px 0 44px}
+    section{padding:52px 0 6px}
+    .card{padding:20px}
+    .timeline{padding-left:26px}
+    .tl-item::before{left:-24px}
   }
 </style>
 </head>
 <body>
 
-<header class="top">
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<header>
   <div class="wrap">
-    <div class="brand">
-      <span class="mark" aria-hidden="true">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2.5 4.5 5.6v6.1c0 4.6 3.2 8.4 7.5 9.8 4.3-1.4 7.5-5.2 7.5-9.8V5.6L12 2.5Z"/>
-          <path d="M8.8 12.1l2.2 2.2 4.2-4.4"/>
-        </svg>
-      </span>
-      大学生网络安全常识
+    <div class="badge">HONKAI: STAR RAIL</div>
+    <h1>崩坏：星穹铁道</h1>
+    <p class="sub">沿着星轨前行，<b>愿此行终抵群星</b></p>
+    <div class="head-tag">
+      <span>太空歌剧 RPG</span>
+      <span>米哈游 HoYoverse</span>
+      <span>星神 · 命途 · 开拓</span>
+      <span>回合制策略战斗</span>
     </div>
-    <nav class="links">
-      <a href="#password">密码安全</a>
-      <a href="#phishing">识别钓鱼</a>
-      <a href="#privacy">信息保护</a>
-      <a href="#quiz">钓鱼演练</a>
-      <a href="#checklist">自查清单</a>
-    </nav>
+
+    <svg class="orbit-box" viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="core" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#fff8e0"/>
+          <stop offset="45%" stop-color="#f2c14e"/>
+          <stop offset="100%" stop-color="#f2c14e" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#5fe3ff" stop-opacity=".85"/>
+          <stop offset="100%" stop-color="#a98bff" stop-opacity=".25"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="310" cy="170" rx="270" ry="96" fill="none" stroke="url(#rg1)" stroke-width="1.3" opacity=".75"/>
+      <ellipse cx="310" cy="170" rx="196" ry="68" fill="none" stroke="#a98bff" stroke-width="1" opacity=".4" stroke-dasharray="5 7"/>
+      <ellipse cx="310" cy="170" rx="118" ry="42" fill="none" stroke="#f2c14e" stroke-width="1" opacity=".45"/>
+      <circle cx="310" cy="170" r="40" fill="url(#core)"/>
+      <circle cx="310" cy="170" r="15" fill="#fff6d8"/>
+      <g class="orbit-ring">
+        <circle cx="580" cy="170" r="7" fill="#5fe3ff"/>
+        <circle cx="580" cy="170" r="12" fill="none" stroke="#5fe3ff" stroke-width="1" opacity=".5"/>
+      </g>
+      <g class="orbit-ring r2">
+        <circle cx="310" cy="102" r="5.5" fill="#ff7a93"/>
+        <circle cx="428" cy="215" r="4.5" fill="#a98bff"/>
+      </g>
+      <circle cx="310" cy="128" r="4" fill="#ffe6a3"/>
+      <circle cx="192" cy="222" r="5" fill="#8ef0c0" opacity=".9"/>
+    </svg>
   </div>
 </header>
 
-<div class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="tagline"><span class="dot"></span>校园网络安全第一课</span>
-      <h1>守住你的<em>账号、钱包与隐私</em></h1>
-      <p class="lead">
-        大学四年里，你会注册几十个账号、连上无数个 WiFi、收到成百上千封邮件。
-        攻击者不需要多高深的技术——他们只需要你的一次疏忽。
-        本文用最短的篇幅讲清三件事：<b>怎么设密码</b>、<b>怎么识破钓鱼</b>、<b>怎么保护个人信息</b>。
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#password">开始学习</a>
-        <a class="btn btn-ghost" href="#quiz">测测你的防骗能力</a>
-      </div>
-    </div>
-    <div class="shield-card">
-      <h3>你的安全水位</h3>
-      <p class="sub">刚入学的大学生平均只做到下面 5 项中的不到 2 项。</p>
-      <div class="score-row">
-        <span class="score-num" id="heroScore">1.8</span>
-        <span class="score-total">/ 5 项基础防护</span>
-      </div>
-      <div class="bar"><span></span></div>
-      <ul class="mini-list">
-        <li>· <span><b>密码</b>：同一密码走天下</span></li>
-        <li>· <span><b>验证码</b>：只给短信，不开两步验证</span></li>
-        <li>· <span><b>邮件</b>：看到“紧急”就点链接</span></li>
-        <li>· <span><b>WiFi</b>：公共场所随便连、随便登录</span></li>
-        <li>· <span><b>隐私</b>：朋友圈晒车票、晒学生证</span></li>
-      </ul>
-    </div>
+<nav>
+  <div class="wrap">
+    <a href="#world">世界观</a>
+    <a href="#terms">核心名词</a>
+    <a href="#story">剧情简介</a>
+    <a href="#chars">角色简介</a>
+    <a href="#factions">势力一览</a>
+    <a href="#end">关于本站</a>
   </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- 世界观 -->
+  <section id="world">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <h2>世界观 · 星穹之下的旅人</h2>
+    </div>
+    <p class="sec-desc">
+      在一个由「星神」与「命途」构成法则的宇宙里，开拓者们搭乘列车，沿着陨落星神的轨迹穿越各个世界。
+    </p>
+
+    <div class="grid2 reveal">
+      <div class="card">
+        <h3>星神与命途</h3>
+        <p>宇宙中存在着名为「星神」的至高存在，祂们各自代表一条哲学意义上的「命途」——开拓、毁灭、存护、巡猎、丰饶、同谐……命途是力量的来源，也是行事的准则。</p>
+        <p>凡人若与某条命途产生共鸣，便可能踏上「令使」之路，获得超越常理的力量。星神并不总是善意，祂们的目光落在何处，往往意味着一个世界的命运转折。</p>
+      </div>
+      <div class="card">
+        <h3>星穹列车与开拓者</h3>
+        <p>「星穹列车」由星神「开拓」的令使所造，沿着星轨穿行于各个世界之间，记录文明、连接孤岛。列车成员被称为无名客，使命是「开拓」——不是为了征服，而是为了让世界彼此相遇。</p>
+        <p>玩家扮演的主角意外与「星核」相融，成为能够驾驭多种命途的存在，由此登上列车，成为了这趟旅程中特殊的一员。</p>
+      </div>
+      <div class="card">
+        <h3>开拓的旅途</h3>
+        <p>每到一站，列车都要解开该世界因星核而起的危机：被冰封的行星、陨落的星神遗骸、循环往复的梦境……每个世界都是一则独立的文明寓言，却又隐隐指向更大的谜题。</p>
+        <p>看似互不相干的旅途，正在拼凑出一张关于宇宙终局的巨大拼图。</p>
+      </div>
+      <div class="card">
+        <h3>主题与基调</h3>
+        <p>作品以轻快的公路片节奏展开，用喜剧化的日常冲淡沉重的命题。但在玩笑之下，它始终在追问：当世界注定走向终点，个体该以什么姿态活下去？</p>
+        <p>答案或许就写在列车的车票上——<em>愿此行终抵群星</em>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心名词 -->
+  <section id="terms">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <h2>核心名词 · 读懂宇宙的几个关键词</h2>
+    </div>
+    <p class="sec-desc">第一次登上列车，先记住这几个词，剧情就顺了。</p>
+
+    <div class="terms reveal">
+      <div class="term"><b>星核</b><span>散落宇宙的神秘物质，会引发世界的灾变，也是驱动剧情的关键线索。</span></div>
+      <div class="term"><b>命途</b><span>由星神所代表的法则与力量体系，决定一个存在的行事逻辑与能力走向。</span></div>
+      <div class="term"><b>令使</b><span>被星神选中、承载其部分权柄的存在，是命途在现实中的代言者。</span></div>
+      <div class="term"><b>无名客</b><span>星穹列车的成员。不隶属于任何势力，只为「开拓」而行走群星。</span></div>
+      <div class="term"><b>星际和平公司</b><span>横跨宇宙的巨型商业势力，以贸易与资本为触手，影响着无数世界。</span></div>
+      <div class="term"><b>模拟宇宙</b><span>通过数据推演复现命途与星神的技术，也是玩家挑战的重要玩法场景。</span></div>
+    </div>
+  </section>
+
+  <!-- 剧情简介 -->
+  <section id="story">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <h2>剧情简介 · 列车停靠的几站</h2>
+    </div>
+    <p class="sec-desc">以主角登上星穹列车为起点，旅途由一个个世界串成。以下仅为部分站点与走向的概述。</p>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-title">序章 · 通往群星的邀请</div>
+        <div class="tl-sub">SPACE STATION HERTA</div>
+        <p>主角在「黑塔」空间站苏醒，体内已与星核相融。空间站遭遇反物质军团的袭击，在与卡芙卡、银狼等陌生人的交锋中，主角被星穹列车的领航员姬子与列车长帕姆接纳，正式成为无名客。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">第一站 · 永冬之下的雅利洛六号</div>
+        <div class="tl-sub">JARILO-VI</div>
+        <p>列车抵达被永冬笼罩的雅利洛六号。地表是严寒风雪与残存的城邦「贝洛伯格」，地下则生活着被排斥的矿民。星核引发的寒潮与「存护」命途的壁垒彼此角力，主角一行在守护者布洛妮娅与银鬃铁卫的纠葛中，试图解开这颗星球的困局。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">第二站 · 仙舟罗浮的巡猎号角</div>
+        <div class="tl-sub">THE XIANZHOU LUOFU</div>
+        <p>车队受「仙舟罗浮」之邀前往协助。这艘航行于星海的巨舰正面临药王秘传与星核的双重威胁，丰饶与巡猎两条命途的宿怨在此集中爆发。主角与景元、丹恒等人并肩，直面被封印于星舟深处的古老存在。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">第三站 · 匹诺康尼的梦境列车</div>
+        <div class="tl-sub">PENACONY</div>
+        <p>列车受邀前往「匹诺康尼」——由家族经营的梦境度假胜地。华丽的表象之下潜伏着更深的谜题：记忆、家族、钟表匠的遗产，以及一场关于「梦境与真实」的盛大宴会，正缓缓揭开帷幕。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">未完的旅途 · 群星仍在等待</div>
+        <div class="tl-sub">TO BE CONTINUED</div>
+        <p>每一站都在为更宏大的谜题埋线：星核究竟为何存在，多条命途的交汇指向何方。列车不会停下，答案也在下一站。</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <b>提示：</b>剧情包含大量支线与世界任务，各世界的因果也与「模拟宇宙」中的推演相互印证。以上仅为梗概，完整剧情建议亲自体验。
+    </div>
+  </section>
+
+  <!-- 角色简介 -->
+  <section id="chars">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <h2>角色简介 · 车上的同行者</h2>
+    </div>
+    <p class="sec-desc">星穹列车与沿途结缘的伙伴各具个性，以下是几位代表性角色。</p>
+
+    <div class="grid3 reveal">
+      <div class="char" style="--a1:#5fe3ff;--a2:#3aa0ff;--accent:rgba(95,227,255,.35)">
+        <div class="avatar">开</div>
+        <h4>主角 · 开拓者</h4>
+        <div class="en">THE TRAILBLAZER</div>
+        <div class="path">命途：开拓 / 毁灭 / 存护 / 同谐</div>
+        <p>体内与星核相融的特殊存在，能够驾驭多条命途，是列车旅途的核心视角。性别与形象可由玩家自选，性格在旅途中逐渐成形。</p>
+        <div class="quote">「列车通往何方，我们就走到何方。」</div>
+      </div>
+
+      <div class="char" style="--a1:#ffb3c6;--a2:#ff6a8a;--accent:rgba(255,122,147,.32)">
+        <div class="avatar">三</div>
+        <h4>三月七</h4>
+        <div class="en">MARCH 7TH</div>
+        <div class="path">命途：存护 / 巡猎</div>
+        <p>从六相冰中苏醒、失去过往记忆的少女，因此以「三月七」为名。性格开朗爱玩、热爱拍照，用相机记录旅途中的一切，也执着于寻找自己的过去。</p>
+        <div class="quote">「等我拍张照，先别动！」</div>
+      </div>
+
+      <div class="char" style="--a1:#8ef0c0;--a2:#2fbf8f;--accent:rgba(142,240,192,.3)">
+        <div class="avatar">丹</div>
+        <h4>丹恒</h4>
+        <div class="en">DAN HENG</div>
+        <div class="path">命途：巡猎 / 虚无</div>
+        <p>列车的护卫，出生于仙舟罗浮、沉默寡言的持枪者。背负着与「龙」相关的沉重身世，冷静克制，却在关键时刻始终站在同伴身前。</p>
+        <div class="quote">「多说无益，我在前面开路。」</div>
+      </div>
+
+      <div class="char" style="--a1:#ffe6a3;--a2:#f2a03e;--accent:rgba(242,193,78,.32)">
+        <div class="avatar">姬</div>
+        <h4>姬子</h4>
+        <div class="en">HIMEKO</div>
+        <div class="path">命途：智识</div>
+        <p>星穹列车的领航员，优雅沉稳的科学家与工程师。她修复了星穹列车，并带领无名客踏上开拓之旅，是全车最可靠的定心丸。</p>
+        <div class="quote">「星轨已经铺好，出发吧。」</div>
+      </div>
+
+      <div class="char" style="--a1:#c7b6ff;--a2:#7b5cff;--accent:rgba(169,139,255,.32)">
+        <div class="avatar">瓦</div>
+        <h4>瓦尔特·杨</h4>
+        <div class="en">WELT YANG</div>
+        <div class="path">命途：虚无</div>
+        <p>因故滞留于这个宇宙的旧时代战士，实力深不可测。表面严肃，实则温和，习惯把危险挡在自己身上。</p>
+        <div class="quote">「这一代人该有更好的未来。」</div>
+      </div>
+
+      <div class="char" style="--a1:#bfe9ff;--a2:#63b8ff;--accent:rgba(99,184,255,.3)">
+        <div class="avatar">帕</div>
+        <h4>帕姆</h4>
+        <div class="en">POM-POM</div>
+        <div class="path">身份：列车长</div>
+        <p>星穹列车的列车长，圆滚滚的小家伙，语尾总带着「帕姆」。负责列车日常事务，认为自己是全车最辛苦的人。</p>
+        <div class="quote">「列车长的工作可多着呢，帕姆！」</div>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><b>4+</b><span>主线世界站点</span></div>
+      <div class="stat"><b>7</b><span>已知主要命途</span></div>
+      <div class="stat"><b>∞</b><span>待探索的星轨</span></div>
+      <div class="stat"><b>1</b><span>不会停下的列车</span></div>
+    </div>
+  </section>
+
+  <!-- 势力一览 -->
+  <section id="factions">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <h2>势力一览 · 谁在星海中角力</h2>
+    </div>
+    <p class="sec-desc">除了行走的列车，宇宙中还盘踞着诸多各怀目的的势力。</p>
+
+    <div class="grid3 reveal">
+      <div class="card">
+        <h3>星穹列车</h3>
+        <p>由无名客组成的中立旅团，以开拓为唯一使命。不扩张、不征服，只做世界的见证者与连接者。</p>
+      </div>
+      <div class="card">
+        <h3>星际和平公司</h3>
+        <p>宇宙级的商业巨擘，以资本、贸易与律法渗透各个世界。信奉「存护」，行事却常带算计。</p>
+      </div>
+      <div class="card">
+        <h3>仙舟联盟</h3>
+        <p>六艘航行于星海的巨舰组成的联盟，承载「巡猎」命途，世代追猎以「丰饶」为名的古老威胁。</p>
+      </div>
+      <div class="card">
+        <h3>反物质军团</h3>
+        <p>效忠于「毁灭」星神的战争机器，以焚毁文明为目的，是主角旅途中反复遭遇的敌手。</p>
+      </div>
+      <div class="card">
+        <h3>星核猎手</h3>
+        <p>掌握未来剧本的神秘团体，行为亦敌亦友。他们所做的一切，似乎都在为某个既定结局铺路。</p>
+      </div>
+      <div class="card">
+        <h3>各世界本土势力</h3>
+        <p>从贝洛伯格的银鬃铁卫，到匹诺康尼的家族，每个世界都有自己的秩序，也都有自己的裂缝。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="end">
+    <div class="sec-head">
+      <div class="sec-no">06</div>
+      <h2>关于本站</h2>
+    </div>
+    <div class="card reveal">
+      <div class="reveal">
+        <h3>说明</h3>
+        <p>这是一个以「崩坏：星穹铁道」为主题的静态介绍页面，仅作学习与交流之用。页面为单文件 HTML，所有样式与脚本均内嵌，不依赖任何外部资源。</p>
+        <p>内容为对游戏世界观、剧情与角色的简要整理，情节梗概与角色设定版权归米哈游 / HoYoverse 所有。</p>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<!-- ================= 密码安全 ================= -->
-<section id="password">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 01 · Password</div>
-      <h2>密码安全：一次泄露，全线崩塌</h2>
-      <p>
-        大多数“被盗号”并不是被暴力破解的，而是因为你在某个不重要的论坛用过同一个密码。
-        那个论坛被拖库之后，攻击者拿着这组账号密码去撞你的邮箱、微信、支付宝——
-        这在黑产里叫 <b>撞库</b>，成功率比你想象的高得多。
-      </p>
-    </div>
-
-    <div class="grid g3">
-      <div class="card">
-        <div class="icon i-red" aria-hidden="true">✕</div>
-        <h3>这些做法的风险</h3>
-        <ul class="clean">
-          <li><b>一码多用</b>：任意一处泄露，全部账号失守</li>
-          <li><b>弱口令</b>：<code>123456</code>、<code>abc123</code>、生日、手机号</li>
-          <li><b>规律变形</b>：<code>Password1</code> → <code>Password2</code></li>
-          <li><b>明文存放</b>：存进微信收藏、备忘录、聊天记录</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="icon i-green" aria-hidden="true">✓</div>
-        <h3>推荐的做法</h3>
-        <ul class="clean">
-          <li><b>密码短语</b>：4～5 个不相关的词 + 数字符号，如 <code>火锅-鲸鱼-7-月亮</code></li>
-          <li><b>一账号一密码</b>：每个重要账号都是独立的一组</li>
-          <li><b>密码管理器</b>：只记住一个主密码，其余交给工具生成</li>
-          <li><b>长度优先</b>：12 位以上，长度比复杂度更重要</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="icon i-blue" aria-hidden="true">🔒</div>
-        <h3>比密码更重要：两步验证</h3>
-        <p>
-          开启两步验证（2FA）后，即使密码被偷，对方没有第二个因素也进不去。
-          优先选择 <b>验证器 App</b>（如 Microsoft Authenticator）或 <b>硬件安全密钥</b>；
-          短信验证码虽然比没有强，但存在被 SIM 卡劫持的风险。
-        </p>
-        <div class="pill-row">
-          <span class="pill p-green">推荐：验证器 App</span>
-          <span class="pill p-blue">可用：短信验证码</span>
-          <span class="pill p-red">避免：只在单一设备上</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid g2" style="margin-top:18px;">
-      <div class="card">
-        <h3>把学校和企业账号当“高价值目标”</h3>
-        <p>
-          校园统一身份认证、教务系统、邮箱、云盘往往互相打通。
-          攻破其中一个，等于拿到了你成绩、课表、个人信息甚至其他系统权限的钥匙。
-          这类账号请务必修：<b>独立强密码 + 两步验证 + 不与其他网站共用</b>。
-        </p>
-        <div class="note warn">
-          <b>关于“安全问题的答案”：</b>把“母亲的名字”“出生城市”当作找回密码的问题，等于把密码写在了朋友圈上。
-          在社交平台公开的信息，一律不要用于密保问题。
-        </div>
-      </div>
-      <div class="card">
-        <h3>密码自测：现在就试试</h3>
-        <p style="margin-bottom:16px;">
-          下面的检测在你的浏览器本地完成，输入内容不会被上传或保存。
-          试着输入你正在用的密码，看看它能打几分。
-        </p>
-        <div class="checker" style="box-shadow:none;border:none;padding:0;">
-          <div class="field">
-            <input id="pwInput" type="text" placeholder="在此输入密码进行检测（仅本地计算）" autocomplete="off" spellcheck="false" aria-label="密码输入框">
-            <button class="btn btn-ghost btn-sm" id="pwToggle" type="button">显示</button>
-          </div>
-          <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <div class="verdict">
-            <span class="label" id="pwLabel">等待输入</span>
-            <span id="pwMeta" style="color:var(--ink-3);font-size:13.5px;">长度 0 位</span>
-          </div>
-          <ul class="tips" id="pwTips"></ul>
-          <p class="hint">提示：长度 ≥ 12 位、包含大小写字母/数字/符号、且不是常见密码，才算合格。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 钓鱼 ================= -->
-<section id="phishing">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 02 · Phishing</div>
-      <h2>识别钓鱼消息：先怀疑，再点击</h2>
-      <p>
-        钓鱼攻击利用的是情绪：<b>紧急、恐惧、好奇、贪便宜</b>。
-        标题越吓人、优惠越夸张、时间越紧迫，你越要慢下来。
-        记住一个原则：<b>正规机构不会通过短信或邮件索要你的密码和验证码。</b>
-      </p>
-    </div>
-
-    <div class="grid g4">
-      <div class="card">
-        <div class="icon i-amber" aria-hidden="true">⏱</div>
-        <h4>制造紧迫感</h4>
-        <p>“24 小时内不处理将冻结账号”“最后 2 小时领取”。</p>
-      </div>
-      <div class="card">
-        <div class="icon i-amber" aria-hidden="true">✉</div>
-        <h4>仿冒发件人</h4>
-        <p>显示名是“教务老师”，真实地址却是随机免费邮箱。</p>
-      </div>
-      <div class="card">
-        <div class="icon i-amber" aria-hidden="true">🔗</div>
-        <h4>域名近似</h4>
-        <p><code>tsinghua-edu.cn</code>、<code>sch00l.com</code> 这类只差一两个字符的域名。</p>
-      </div>
-      <div class="card">
-        <div class="icon i-amber" aria-hidden="true">🎣</div>
-        <h4>索要敏感信息</h4>
-        <p>要密码、要验证码、要身份证照片、要银行卡号。</p>
-      </div>
-    </div>
-
-    <h3 style="margin:34px 0 14px;">一眼看穿几种常见骗局</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>骗局类型</th><th>典型话术 / 场景</th><th>破绽点（红旗信号）</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>奖学金 / 助学金诈骗</b></td>
-            <td>“你已获评国家级奖学金，请点击链接填写银行卡与验证码领取”</td>
-            <td>要验证码、要银行卡密码；发放流程不会通过短信链接完成</td>
-          </tr>
-          <tr>
-            <td><b>教务 / 学籍通知</b></td>
-            <td>“你的学籍状态异常，请登录 <code>xxx-edu.com</code> 核验”</td>
-            <td>域名与学校官网不一致；用真实官网域名逐一比对</td>
-          </tr>
-          <tr>
-            <td><b>兼职 / 刷单返利</b></td>
-            <td>“日结 300，先垫付再返现”</td>
-            <td>要先交钱、先垫资的兼职基本都是骗局</td>
-          </tr>
-          <tr>
-            <td><b>快递 / 退票类短信</b></td>
-            <td>“您的包裹丢失，点击链接填写信息进行理赔”</td>
-            <td>去官方 App 或官网核对订单，从不点短信里的链接</td>
-          </tr>
-          <tr>
-            <td><b>冒充熟人借款</b></td>
-            <td>“我是你辅导员／室友，急用钱，先用微信转我”</td>
-            <td>换一个渠道当面或电话核实身份</td>
-          </tr>
-          <tr>
-            <td><b>WiFi / 二维码</b></td>
-            <td>扫码连陌生 WiFi、扫码“激活校园卡”</td>
-            <td>公共 WiFi 可能被克隆；不明二维码不扫</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="grid g2" style="margin-top:22px;">
-      <div class="card">
-        <h3>收到可疑消息时的“五步法”</h3>
-        <ol class="clean" style="padding-left:20px;">
-          <li><b>停</b>：不点链接、不下载附件、不回复</li>
-          <li><b>看</b>：把鼠标悬停在链接上，看真实域名（手机可长按预览）</li>
-          <li><b>查</b>：用官方 App / 官网 / 官方电话独立核实，不通过消息里的联系方式</li>
-          <li><b>问</b>：向同学、辅导员、学校信息化部门求证</li>
-          <li><b>报</b>：确认是钓鱼就举报，并提醒身边同学</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3>链接怎么看真假</h3>
-        <p>域名的<b>主体部分</b>（紧挨着 <code>.com</code>/<code>.cn</code> 前面的那一段）才是真正的归属：</p>
-        <div class="table-wrap" style="margin-top:12px;">
-          <table style="min-width:0;">
-            <tbody>
-              <tr><td><code>www.school.edu.cn</code></td><td><span class="pill p-green">可信</span></td></tr>
-              <tr><td><code>school.edu.cn.evil.com</code></td><td><span class="pill p-red">钓鱼</span></td></tr>
-              <tr><td><code>sch00l.edu.cn</code></td><td><span class="pill p-red">钓鱼（数字 0 冒充字母 o）</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="note" style="margin-top:14px;">
-          短链接（<code>bit.ly</code>、<code>t.cn</code> 等）会掩盖真实地址，收到时先展开或直接忽略。
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 个人信息保护 ================= -->
-<section id="privacy">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 03 · Privacy</div>
-      <h2>个人信息保护：减少被“拼图”的可能</h2>
-      <p>
-        单独看，姓名、学号、宿舍楼、常去的奶茶店都不算秘密；
-        但把它们拼在一起，攻击者就能<b>冒充你</b>去骗你的家人，或者精准地给你发一条“无法识破”的钓鱼短信。
-        隐私保护的核心，就是<b>别让别人轻易完成这块拼图</b>。
-      </p>
-    </div>
-
-    <div class="grid g3">
-      <div class="card">
-        <div class="icon i-violet" aria-hidden="true">🪪</div>
-        <h3>核心敏感信息</h3>
-        <p>这些信息一旦泄露，危害直接且难以挽回：</p>
-        <ul class="clean">
-          <li>身份证号与正反面照片</li>
-          <li>银行卡号、支付密码、短信验证码</li>
-          <li>人脸、指纹等生物特征</li>
-          <li>学信网 / 教务系统账号</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="icon i-violet" aria-hidden="true">📱</div>
-        <h3>社交平台别晒这些</h3>
-        <ul class="clean">
-          <li>车票、机票、登机牌（二维码含身份信息）</li>
-          <li>学生证、校园卡、宿舍门牌</li>
-          <li>实时定位、考勤打卡截图</li>
-          <li>快递面单（记得撕掉或涂掉姓名电话）</li>
-        </ul>
-        <div class="note" style="margin-top:12px;">
-          晒照前问一句：<b>这张图能让我被找到吗？</b>
-        </div>
-      </div>
-      <div class="card">
-        <div class="icon i-violet" aria-hidden="true">⚙</div>
-        <h3>App 与设备设置</h3>
-        <ul class="clean">
-          <li>安装时只授予必要权限（手电筒不需要通讯录）</li>
-          <li>关闭“允许陌生人查看十条朋友圈”</li>
-          <li>导出或关闭个性化广告追踪</li>
-          <li>旧手机、旧电脑转卖前彻底抹除数据</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="grid g2" style="margin-top:18px;">
-      <div class="card">
-        <h3>公共 WiFi 与公共电脑的正确姿势</h3>
-        <ul class="clean">
-          <li><b>不登录</b>网银、支付、校园账号等敏感系统</li>
-          <li>优先使用手机热点；必须用时，只访问 HTTPS 网站</li>
-          <li>关闭设备的“自动连接已知 WiFi”，避免连上同名钓鱼热点</li>
-          <li>网吧、打印店电脑用完要退出账号并清除浏览记录</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>实名认证与个人信息</h3>
-        <p>
-          注册小网站时要身份证、要人脸时，先问自己：这个服务值得交出这些吗？
-          各类“测试类”小程序（测性格、测颜值、测运势）常常以娱乐为名收集姓名、手机号与照片，
-          尽量避免使用真实信息。
-        </p>
-        <div class="note">
-          <b>《个人信息保护法》</b>赋予你知情、删除与撤回同意的权利。遇到明显过度收集，可以向平台投诉或向网信部门举报。
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 钓鱼演练 ================= -->
-<section id="quiz">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 04 · Practice</div>
-      <h2>钓鱼演练：你能识破几条？</h2>
-      <p>下面三条消息，有的正常、有的可疑。先判断“安全”还是“可疑”，再看解析。全部内容为教学示例，不涉及真实链接。</p>
-    </div>
-
-    <div class="phish" id="phishBox"></div>
-
-    <div class="quiz-bar" style="margin-top:22px;">
-      <span>已作答 <strong id="qDone">0</strong> / 3 · 判断正确 <strong id="qRight">0</strong> 条</span>
-      <button class="btn btn-ghost btn-sm" id="quizReset" type="button">重新开始</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 清单 ================= -->
-<section id="checklist">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 05 · Checklist</div>
-      <h2>10 条自查清单</h2>
-      <p>点一下就能勾选。全部打勾的同学，安全水位已经超过绝大多数同龄人。</p>
-    </div>
-    <ul class="checklist" id="checkList"></ul>
-    <div class="note" style="margin-top:20px;">
-      进度保存在本页内存中，刷新后重新计算，不会上传任何数据。
-    </div>
-  </div>
-</section>
-
-<!-- ================= 紧急处置 ================= -->
-<section id="emergency" style="border-bottom:none;">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kicker">Part 06 · Response</div>
-      <h2>万一已经中招：黄金 72 小时</h2>
-      <p>发现自己点了钓鱼链接、泄露了验证码，或在陌生设备登录过，按顺序做下面几件事。</p>
-    </div>
-    <div class="grid g2">
-      <ol class="steps">
-        <li>
-          <h4>立刻改密码</h4>
-          <p>在<b>安全设备</b>（自己的手机或可信电脑）上修改邮箱、校园账号、支付类 App 的密码，并开启两步验证。</p>
-        </li>
-        <li>
-          <h4>踢掉陌生登录</h4>
-          <p>在账号安全设置里查看“登录设备管理”，注销所有不认识的设备与会话。</p>
-        </li>
-        <li>
-          <h4>冻结资金相关</h4>
-          <p>联系银行或支付平台冻结卡片、修改支付密码，检查是否有异常交易与免密支付授权。</p>
-        </li>
-      </ol>
-      <ol class="steps">
-        <li>
-          <h4>通知可能被冒充的对象</h4>
-          <p>告诉家人、同学、辅导员：你的账号可能被盗，收到借钱、转账请求务必先电话核实。</p>
-        </li>
-        <li>
-          <h4>保留证据并报警举报</h4>
-          <p>截图保存聊天、短信、转账记录，向学校信息化部门报告；涉及转账可拨打 96110 反诈专线或报警。</p>
-        </li>
-        <li>
-          <h4>复盘并加固</h4>
-          <p>检查是否还有其他平台用了同一密码，全部改掉；订阅账号泄露查询服务，及时获知风险。</p>
-        </li>
-      </ol>
-    </div>
-    <div class="note warn" style="margin-top:22px;">
-      <b>记住一句话：</b>任何时候，<u>验证码</u>、<u>密码</u>、<u>身份证照片</u> 都不应该出现在聊天框、短信回复或者来路不明的网页表单里。
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap foot">
-    <span>大学生网络安全常识 · 校园信息安全科普</span>
-    <span>三分钟读完 · <span class="kbd">Ctrl</span> + <span class="kbd">F</span> 可搜索关键词</span>
+  <div class="wrap">
+    <span class="line"></span>
+    <p>星穹列车 · 无名客的旅途记录</p>
+    <p style="margin-top:6px;opacity:.7">愿此行终抵群星 · 单文件静态页面</p>
   </div>
 </footer>
 
 <script>
-(function () {
-  "use strict";
-
-  /* ---------------- 密码强度检测（本地计算） ---------------- */
-  var COMMON = [
-    "123456", "123456789", "12345678", "password", "qwerty", "abc123",
-    "111111", "123123", "admin", "iloveyou", "666666", "888888",
-    "a123456", "123456a", "woaini", "zhangsan", "qwerty123", "000000"
-  ];
-
-  var input = document.getElementById("pwInput");
-  var toggle = document.getElementById("pwToggle");
-  var cells = document.querySelectorAll(".meter i");
-  var label = document.getElementById("pwLabel");
-  var meta = document.getElementById("pwMeta");
-  var tips = document.getElementById("pwTips");
-
-  var PALETTE = ["#dc2626", "#d97706", "#d97706", "#0f9d66"];
-  var NAMES = ["很弱", "较弱", "中等", "强"];
-
-  function scorePassword(pw) {
-    if (!pw) return { s: 0, checks: {} };
-    var checks = {
-      len12: pw.length >= 12,
-      len8: pw.length >= 8,
-      lower: /[a-z]/.test(pw),
-      upper: /[A-Z]/.test(pw),
-      digit: /[0-9]/.test(pw),
-      symbol: /[^A-Za-z0-9]/.test(pw),
-      notCommon: COMMON.indexOf(pw.toLowerCase()) === -1,
-      notSeq: !/(.)\1{2,}/.test(pw) && !/(012|123|234|345|456|567|678|789|abc|qwe|asd)/i.test(pw)
-    };
-    var s = 0;
-    if (pw.length >= 8) s += 1;
-    if (checks.len12) s += 1;
-    var variety = (checks.lower ? 1 : 0) + (checks.upper ? 1 : 0) + (checks.digit ? 1 : 0) + (checks.symbol ? 1 : 0);
-    if (variety >= 2) s += 1;
-    if (variety >= 3) s += 1;
-    if (variety >= 4) s += 1;
-    if (!checks.notCommon) s = Math.min(s, 1);
-    if (!checks.notSeq) s = Math.min(s, 2);
-    if (pw.length < 6) s = Math.min(s, 1);
-    s = Math.max(0, Math.min(4, s));
-    return { s: s, checks: checks };
-  }
-
-  function renderTips(checks, hasValue) {
-    var items = [
-      { key: "len12", ok: "长度达到 12 位及以上", bad: "长度不足 12 位，越长越安全" },
-      { key: "upper", ok: "包含大写字母", bad: "加入大写字母" },
-      { key: "digit", ok: "包含数字", bad: "加入数字" },
-      { key: "symbol", ok: "包含特殊符号（如 ! ? - _）", bad: "加入特殊符号" },
-      { key: "notCommon", ok: "不是常见弱密码", bad: "属于常见弱密码，请更换" },
-      { key: "notSeq", ok: "没有连续或重复字符", bad: "避免 123、aaa 这类连续或重复字符" }
-    ];
-    tips.innerHTML = "";
-    if (!hasValue) return;
-    items.forEach(function (it) {
-      var li = document.createElement("li");
-      var ok = checks[it.key];
-      li.textContent = ok ? it.ok : it.bad;
-      if (!ok) li.className = "bad";
-      tips.appendChild(li);
-    });
-  }
-
-  function update() {
-    var pw = input.value;
-    var r = scorePassword(pw);
-    meta.textContent = "长度 " + pw.length + " 位";
-    if (!pw) {
-      label.textContent = "等待输入";
-      label.style.color = "var(--ink-3)";
-      cells.forEach(function (c) { c.style.background = "#eef1f6"; });
-      renderTips({}, false);
+  // 滚动入场动画
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < items.length; i++) items[i].classList.add('on');
       return;
     }
-    var idx = Math.max(0, r.s - 1);
-    label.textContent = NAMES[idx] + "（" + r.s + "/4）";
-    label.style.color = PALETTE[idx];
-    cells.forEach(function (c, i) {
-      c.style.background = i < r.s ? PALETTE[idx] : "#eef1f6";
-    });
-    renderTips(r.checks, true);
-  }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+  })();
 
-  input.addEventListener("input", update);
-  toggle.addEventListener("click", function () {
-    var hidden = input.type === "text";
-    input.type = hidden ? "password" : "text";
-    toggle.textContent = hidden ? "显示" : "隐藏";
-  });
-
-  /* ---------------- 钓鱼演练 ---------------- */
-  var MESSAGES = [
-    {
-      avatar: "奖", color: "#2563eb",
-      name: "校奖助学金办公室",
-      addr: "scholarship@xx-edu.com",
-      subject: "【紧急】你已获评国家励志奖学金，请今日内领取",
-      body: "同学你好：经审核，你已获得国家励志奖学金 5000 元。请在今日 24:00 前点击下方链接填写银行卡号、支付密码及短信验证码，逾期视为放弃。",
-      link: "http://xx-edu.com/scholarship/claim",
-      phish: true,
-      why: "真红旗：官方发放不会索要支付密码和短信验证码；域名 xx-edu.com 与学校官网不一致；用“逾期放弃”制造紧迫感。正确做法是通过学校官网或辅导员核实，绝不填验证码。"
-    },
-    {
-      avatar: "图", color: "#0f9d66",
-      name: "学校图书馆",
-      addr: "library@school.edu.cn",
-      subject: "你所借的 3 本图书将于 3 日后到期",
-      body: "同学你好：你借阅的图书即将到期，请登录图书馆官网“我的借阅”续借或归还，逾期将产生滞纳金。详情请到馆内查询或访问图书馆官方页面。",
-      link: "（正文未附带链接，请自行从学校官网进入图书馆系统）",
-      phish: false,
-      why: "这条消息可信：发件域名为学校官方域名 school.edu.cn，索要的是常规事务提醒，不要求任何密码或验证码，且正文没有诱导点击的短链接。即便消息正常，也建议从官网入口自行登录，而不是点邮件里的链接。"
-    },
-    {
-      avatar: "学", color: "#dc2626",
-      name: "教务处·王老师",
-      addr: "notice-jwc@163-mail.com",
-      subject: "你的学籍状态异常，请立即登录核验",
-      body: "系统检测到你的学籍信息异常，可能影响毕业。请立即点击链接登录统一身份认证，输入学号和密码完成核验，否则 24 小时后学籍将被锁定。",
-      link: "https://school-edu-cn.verify-login.top/auth",
-      phish: true,
-      why: "真红旗：真实发件人是免费邮箱而非学校域名；链接主体域名是 verify-login.top，与学校毫无关系；消息要求输入学号密码；并用“学籍锁定”制造恐慌。任何索要统一身份认证密码的链接都应视为钓鱼。"
+  // 导航平滑跳转与当前高亮
+  (function () {
+    var links = document.querySelectorAll('nav a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function (ev) {
+        var id = this.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (!el) return;
+        ev.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
-  ];
-
-  var box = document.getElementById("phishBox");
-  var qDone = document.getElementById("qDone");
-  var qRight = document.getElementById("qRight");
-  var answered = 0, right = 0;
-
-  function buildMessages() {
-    box.innerHTML = "";
-    answered = 0; right = 0;
-    qDone.textContent = "0";
-    qRight.textContent = "0";
-
-    MESSAGES.forEach(function (m, i) {
-      var card = document.createElement("div");
-      card.className = "msg";
-
-      var head = document.createElement("div");
-      head.className = "msg-head";
-      var av = document.createElement("div");
-      av.className = "msg-avatar";
-      av.style.background = m.color;
-      av.textContent = m.avatar;
-      var who = document.createElement("div");
-      who.className = "msg-who";
-      who.innerHTML = '<div class="name"></div><div class="addr"></div>';
-      who.querySelector(".name").textContent = m.name;
-      who.querySelector(".addr").textContent = m.addr;
-      head.appendChild(av); head.appendChild(who);
-
-      var body = document.createElement("div");
-      body.className = "msg-body";
-      var sub = document.createElement("div");
-      sub.className = "subject";
-      sub.textContent = "主题：" + m.subject;
-      var text = document.createElement("div");
-      text.textContent = m.body;
-      var lk = document.createElement("div");
-      lk.className = "link";
-      lk.style.marginTop = "8px";
-      lk.textContent = "链接：" + m.link;
-      body.appendChild(sub); body.appendChild(text); body.appendChild(lk);
-
-      var actions = document.createElement("div");
-      actions.className = "msg-actions";
-      var bSafe = document.createElement("button");
-      bSafe.type = "button"; bSafe.textContent = "看起来安全";
-      var bFish = document.createElement("button");
-      bFish.type = "button"; bFish.textContent = "这是钓鱼";
-      actions.appendChild(bSafe); actions.appendChild(bFish);
-
-      var vbox = document.createElement("div");
-      vbox.className = "verdict-box";
-
-      function answer(saidPhish) {
-        if (card.dataset.answered === "1") return;
-        card.dataset.answered = "1";
-        answered++;
-        var correct = saidPhish === m.phish;
-        if (correct) right++;
-        qDone.textContent = String(answered);
-        qRight.textContent = String(right);
-        vbox.className = "verdict-box show " + (correct ? "v-ok" : "v-bad");
-        vbox.innerHTML = "<b></b><span></span>";
-        vbox.querySelector("b").textContent = correct
-          ? (m.phish ? "判断正确：这是一条钓鱼消息" : "判断正确：这条消息是正常的")
-          : (m.phish ? "判断有误：这其实是一条钓鱼消息" : "判断有误：这条消息其实是正常的");
-        vbox.querySelector("span").textContent = m.why;
-        bSafe.disabled = true; bFish.disabled = true;
-        bSafe.style.opacity = ".55"; bFish.style.opacity = ".55";
-      }
-
-      bSafe.addEventListener("click", function () { answer(false); });
-      bFish.addEventListener("click", function () { answer(true); });
-
-      card.appendChild(head);
-      card.appendChild(body);
-      card.appendChild(actions);
-      card.appendChild(vbox);
-      box.appendChild(card);
-    });
-  }
-
-  document.getElementById("quizReset").addEventListener("click", buildMessages);
-  buildMessages();
-
-  /* ---------------- 自查清单 ---------------- */
-  var ITEMS = [
-    "重要账号已使用互不相同的强密码",
-    "邮箱、校园账号、支付类 App 已开启两步验证",
-    "使用密码管理器，或至少不把密码存在聊天记录里",
-    "收到“紧急”“限时”消息时，先通过官方渠道核实再操作",
-    "从不点击短信、邮件中的陌生链接填写账号密码或验证码",
-    "社交平台不晒车票、学生证、宿舍门牌与实时定位",
-    "App 权限按最小必要授予，关闭不必要的通讯录、定位权限",
-    "不在公共 WiFi 下登录网银、支付或校园敏感系统",
-    "旧设备转卖或送人前已彻底抹除个人数据",
-    "知道被骗后该改密码、冻结账户、保留证据并报警举报"
-  ];
-  var list = document.getElementById("checkList");
-  ITEMS.forEach(function (t) {
-    var li = document.createElement("li");
-    var box2 = document.createElement("span");
-    box2.className = "box";
-    var sp = document.createElement("span");
-    sp.textContent = t;
-    li.appendChild(box2); li.appendChild(sp);
-    li.addEventListener("click", function () {
-      li.classList.toggle("done");
-    });
-    list.appendChild(li);
-  });
-
-  /* ---------------- 首屏分数微动效 ---------------- */
-  var heroScore = document.getElementById("heroScore");
-  var target = 1.8, cur = 0, step = 0.06;
-  var timer = setInterval(function () {
-    cur += step;
-    if (cur >= target) { cur = target; clearInterval(timer); }
-    heroScore.textContent = cur.toFixed(1);
-  }, 26);
-
-  update();
-})();
+  })();
 </script>
+
 </body>
 </html>
