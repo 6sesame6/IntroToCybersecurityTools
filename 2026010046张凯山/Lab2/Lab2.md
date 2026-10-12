@@ -227,7 +227,7 @@ claude
     ├── Lab2.md
     ├── index.html
     └── imgs/
-        ├── web.workbuddy_png
+        ├── workbuddy_web.png
         └── claude_code_hello.png
 ```
 
