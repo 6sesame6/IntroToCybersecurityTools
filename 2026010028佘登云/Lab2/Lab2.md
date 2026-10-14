@@ -82,7 +82,7 @@ WorkBuddy 适合从自然语言和图形界面入门；信息安全专业的同�
 | 项目 | 内容 |
 | --- | --- |
 | 网页主题 |  熊出没主题网站|
-| 公网访问地址 |https://boonie-bears-forest.app.workbuddy.host/
+| 公网访问地址 |https://boonie-bears-forest.app.workbuddy.host/|
 
 ### 2.4 公网网页展示截图
 
