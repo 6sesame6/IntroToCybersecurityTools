@@ -81,8 +81,8 @@ WorkBuddy 适合从自然语言和图形界面入门；信息安全专业的同�
 
 | 项目 | 内容 |
 | --- | --- |
-| 网页主题 |  熊出没主题网站|
-| 公网访问地址 |https://boonie-bears-forest.app.workbuddy.host/|
+| 网页主题 | 熊出没主题网站 |
+| 公网访问地址 | https://boonie-bears-forest.app.workbuddy.host/ |
 
 ### 2.4 公网网页展示截图
 
@@ -95,9 +95,9 @@ WorkBuddy 适合从自然语言和图形界面入门；信息安全专业的同�
 
 截图必须保存为 `imgs/workbuddy_web.png`。将截图放入指定目录后，下面应能正常显示图片：
 
-![WorkBuddy 制作并部署的公网网页]（imgs/workbuddy_web.png）
+![WorkBuddy 制作并部署的公网网页](imgs/workbuddy_web.png)
 
----![alt text](image.png)
+---
 
 ## 三、充值 DeepSeek API 并通过 CC Switch 接入 Claude Code
 
@@ -106,7 +106,7 @@ WorkBuddy 适合从自然语言和图形界面入门；信息安全专业的同�
 1. 打开 [DeepSeek 开放平台](https://platform.deepseek.com/)，注册或登录自己的账号。
 2. 在平台的充值页面选择或输入 **1 元人民币**，按页面提示完成支付，确认 API 可用余额到账。本次小额充值用于体验按量付费，不要求购买包月套餐或大额充值。
 3. 在 **API keys** 页面创建一个用于本次实验的 API Key，妥善保存在本人电脑上，后面粘贴到 CC Switch 中。
-4. 充值余额用于 API 调用，具体价格可查看 [DeepSeek 模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pric。一次简短问候不需要长对话或复杂任务，完成后可回到平台查看用量。ing)
+4. 充值余额用于 API 调用，具体价格可查看 [DeepSeek 模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing)。一次简短问候不需要长对话或复杂任务，完成后可回到平台查看用量。
 
 **API Key 相当于调用服务的密码。不要把它填进报告、聊天提示词、截图或 GitHub 仓库，也不要将自己的密钥发给其他人。** 本次不要求提交支付记录、余额页面或密钥页面截图。
 
@@ -157,7 +157,7 @@ claude --version
 
 ### 3.3 安装 CC Switch 并配置 DeepSeek
 
-1. 打开 [CC Switch 项目主页](https://gith ub.com/farion1231/cc-switch)，从 [Releases 下载页](https://github.com/farion1231/cc-switch/releases/latest)下载对应系统的安装包。Windows 选择 Windows 安装包，macOS 选择 macOS 安装包。
+1. 打开 [CC Switch 项目主页](https://github.com/farion1231/cc-switch)，从 [Releases 下载页](https://github.com/farion1231/cc-switch/releases/latest)下载对应系统的安装包。Windows 选择 Windows 安装包，macOS 选择 macOS 安装包。
 2. 安装并打开 CC Switch，选择 **Claude Code**，进入添加供应商页面。
 3. 选择 **DeepSeek 官方 API** 对应的预设，填入自己的 API Key；没有该预设时，选择自定义配置并按下表填写。
 4. 检查 API 地址和模型配置，保存后点击该供应商的 **启用** 或切换按钮。本次使用 DeepSeek 的 Anthropic 兼容接口，采用直连配置即可。
@@ -215,7 +215,7 @@ claude
 
 ![Claude Code 输出本人问候语](imgs/claude_code_hello.png)
 
----c:\Users\28248\Desktop\my\IntroToCybersecurityTools\2026010028佘登云\Lab2\imgs\claude_code_hello.png
+---
 
 ## 五、提交要求
 
