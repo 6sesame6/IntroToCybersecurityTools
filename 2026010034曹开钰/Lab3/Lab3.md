@@ -508,11 +508,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | |
-| 是否连接成功 | |
-| 能否打开远程文件夹 | |
-| 远程终端里 `uname -a` 的输出 | |
-| Remote-SSH 是否合格 | |
+| 配置的主机别名（如 `kali-oslab`） |kali-oslab|
+| 是否连接成功 |是|
+| 能否打开远程文件夹 |是|
+| 远程终端里 `uname -a` 的输出 |Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1+kali1 (2026-05-05) x86_64 GNU/Linux|
+| Remote-SSH 是否合格 |合格|
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
