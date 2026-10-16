@@ -127,3 +127,31 @@ assignments:
       - claude_code_hello.png 应能辨认 Claude Code 终端界面、本人发送的问候语请求和模型已经返回的“你好，本人10位学号姓名”。学号姓名须与本次 PR 登记身份及报告一致；接受中文或英文逗号、合理空格等差异。只有输入提示词而无模型回复、回复仍含占位符、输出报错，或用 echo、print 冒充回复，均不算完成。
       - 本次使用 Claude Code 客户端连接 DeepSeek API，不要求 Claude 官方订阅或 Claude 官方模型名称。无需另交版本、安装、CC Switch 配置、DeepSeek 充值、余额或密钥截图；不要仅因终端未显示供应商或模型名称而判为未完成。
       - 两张截图必须来自本人电脑的实际操作，网页截图的公网地址与页面内容、Claude Code 截图中的问候语清晰可读。允许合理裁剪无关区域及不同界面语言和主题，但网页截图必须保留地址栏；不得使用手机拍屏，不得出现 API Key、密码或支付敏感信息。关键内容被裁掉、无法辨认或与报告明显矛盾时应指出。
+  Lab3:
+    enabled: true
+    deadline: "2026-10-24T00:00:00+08:00"
+    min_nonempty_lines: 10
+    allow_extra_files: false
+    report_template: homework/Lab3/Lab3.md
+    required_files:
+      - Lab3.md
+      - imgs/lab3_network.png
+      - imgs/lab3_resources.png
+      - imgs/lab3_mobaxterm.png
+      - imgs/lab3_vscode_remote.png
+    vision_files:
+      - imgs/lab3_network.png
+      - imgs/lab3_resources.png
+      - imgs/lab3_mobaxterm.png
+      - imgs/lab3_vscode_remote.png
+    review_points:
+      - Lab3.md 必须完整保留老师发布的模板，只能替换各验收表格（联网、资源、MobaXterm、VSCode Remote-SSH）第二列中的填写提示和环境验收总结的结论列，不得删除、改写或调整其他标题、说明、表格行、图片引用和小节。
+      - 各验收表格的填写列应全部填写，不能留空或保留填写提示；虚拟机 IP、CPU 核心数、内存、虚磁盘容量、远程终端 whoami 输出、SSH 主机别名等应与截图内容对应，明显矛盾时判为未完成。
+      - 环境验收总结下方的简要说明应填写本人遇到的问题、解决方法或明确说明无问题，不能保留“填写”提示。
+      - 本次只提交 Lab3.md 和 4 张指定截图，不要求提交 hello.txt、配置文件或其他任何文件；软件源用官方源或国内镜像站均可，不得因 Get 行来源判为不合格。
+    vision_review_points:
+      - lab3_network.png 应清晰显示 hostname -I、ip route、ping -c 4 223.5.5.5、ping -c 4 mirrors.tuna.tsinghua.edu.cn 和 sudo apt update 各命令及其输出，命令与输出应能对应；有私有 IP 和 default via 默认路由、两个 ping 有返回、apt update 无 Err/Failed 即算成功。所在网络禁 ping 时，以 apt update 成功输出作为联网证据不算拒绝理由。
+      - lab3_resources.png 应清晰显示 nproc、free -h、lsblk、df -h / 各命令及其输出；CPU 核心数不低于 2、内存不低于 4GB、虚磁盘不小于 40GB 即算达标，显示值略小于 VMware 设置值属正常现象。
+      - lab3_mobaxterm.png 应能辨认 MobaXterm 的 SSH 会话窗口（左侧会话栏或远程终端），远程终端为 Linux 提示符并显示 whoami、hostname、hostname -I 的输出；whoami 输出应与报告填写一致。用 Windows 本地 PowerShell/CMD 冒充远程终端、只有连接界面无命令输出均不算完成。
+      - lab3_vscode_remote.png 应能辨认 VSCode 窗口左下角的 SSH 远程标识（如 SSH: kali-oslab），已打开远程文件夹，集成终端中有 uname -a 输出的 Linux 内核信息；报告填写的主机别名应与图中一致。
+      - 截图必须来自学生本人的 Kali 虚拟机，两张远程连接截图中的 IP 与报告填写的 IP 一致或为同一虚拟机的合理变化；必须由电脑截图功能生成，出现手机拍屏反光、倾斜或关键文字无法辨认时判为不合格。
