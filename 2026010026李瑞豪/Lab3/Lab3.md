@@ -508,11 +508,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | |
-| 是否连接成功 | |
-| 能否打开远程文件夹 | |
-| 远程终端里 `uname -a` 的输出 | |
-| Remote-SSH 是否合格 | |
+| 配置的主机别名（如 `kali-oslab`） | kali-oslab |
+| 是否连接成功 | 成功（左下角显示 `SSH: kali-oslab`） |
+| 能否打开远程文件夹 | 能（用 `~` 打开 `/home/kali`） |
+| 远程终端里 `uname -a` 的输出 | Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-14kali1 (2026-05-05) x86_64 GNU/Linux |
+| Remote-SSH 是否合格 | 合格 |
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
@@ -716,11 +716,11 @@ sudo apt update
 | 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格（官方源 `apt update` 成功，无 `Err`/`Failed`） |
 | CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格（2 核 / 约 6GB / 80GB，符合课程推荐档） |
 | MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格（已从 Windows 登录 Kali 并执行 whoami / hostname） |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 待完成（截图与结论待补充） |
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格（已在 VSCode 中连接 `kali-oslab`，打开远程文件夹 `/home/kali`，并在远程终端执行 `uname -a`） |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> Kali 虚拟机在 VMware 中解压打开后，网络适配器使用 NAT，`hostname -I` 得到 192.168.134.129，默认路由经 192.168.134.2，`ping 223.5.5.5` 与 `ping mirrors.tuna.tsinghua.edu.cn` 均 0% 丢包，`sudo apt update` 使用官方源成功。已在 Kali 中安装并启用 SSH 服务端，并从 Windows 用 MobaXterm 成功远程登录、执行 whoami / hostname / hostname -I。资源分配为 2 核 / 约 6GB / 80GB，符合课程推荐档。VSCode Remote-SSH 连接部分待补充。当前环境可以继续用于后续实验。
+> Kali 虚拟机在 VMware 中解压打开后，网络适配器使用 NAT，`hostname -I` 得到 192.168.134.129，默认路由经 192.168.134.2，`ping 223.5.5.5` 与 `ping mirrors.tuna.tsinghua.edu.cn` 均 0% 丢包，`sudo apt update` 使用官方源成功。已在 Kali 中安装并启用 SSH 服务端，并从 Windows 用 MobaXterm 成功远程登录、执行 whoami / hostname / hostname -I。资源分配为 2 核 / 约 6GB / 80GB，符合课程推荐档。VSCode 侧已安装 Remote - SSH 扩展并配置主机 `kali-oslab`，成功连接后在 VSCode 中打开远程文件夹 `/home/kali`，并在远程终端执行 `uname -a` 得到 Kali 的内核信息，说明终端运行在虚拟机而非 Windows 上。当前环境已满足后续实验要求，可以继续用于后续实验。
 
 ---
 
