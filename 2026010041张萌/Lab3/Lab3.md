@@ -724,7 +724,7 @@ sudo apt update
 | 验收项目 | 合格标准 | 你的结论 |
 | :--- | :--- | :--- |
 | 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 合格。IP 192.168.243.129，默认路由 default via 192.168.243.2 dev eth0，ping 223.5.5.5 与 ping mirrors.tuna.tsinghua.edu.cn 均 0% 丢包 |
-| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格。已按第十五节附录将软件源更换为清华 TUNA 镜像站，`sudo apt update` 全部 `Get:` 行来自 `mirrors.tuna.tsinghua.edu.cn`，共拉取 77.1 MB 用时 11s（约 6.7 MB/s），无 `Err:`、`Failed` |
+| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格。已按第十五节附录将软件源更换为清华 TUNA 镜像站，`sudo apt update` 正常完成（`Hit:1 https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling InRelease`），无 `Err:`、`Failed`；换源后首次更新拉取 77.1 MB 仅用 11s（约 6.7 MB/s） |
 | CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格。`nproc` 输出 4，`free -h` 显示 Mem total 3.8Gi（分配 4096MB），`lsblk` 显示虚磁盘 80.1G |
 | MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格。SSH 连接 kali@192.168.243.129 成功，远程终端执行 `whoami` 输出 kali |
 | VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格。主机别名 kali-oslab，左下角显示 SSH: kali-oslab，已打开 /home/kali 远程目录 |
