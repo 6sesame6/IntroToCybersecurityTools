@@ -156,7 +156,7 @@ assignments:
       - 本次只提交 Lab3.md 和 4 张指定截图，不要求提交 hello.txt、配置文件或其他任何文件；软件源用官方源或国内镜像站均可，不得因 Get 行来源判为不合格。
     vision_review_points:
       - lab3_network.png 应清晰显示 hostname -I、ip route、ping -c 4 223.5.5.5、ping -c 4 mirrors.tuna.tsinghua.edu.cn 和 sudo apt update 各命令及其输出，命令与输出应能对应；有私有 IP 和 default via 默认路由、两个 ping 有返回、apt update 无 Err/Failed 即算成功。所在网络禁 ping 时，以 apt update 成功输出作为联网证据不算拒绝理由。
-      - lab3_resources.png 应清晰显示 nproc、free -h、lsblk、df -h / 各命令及其输出；CPU 核心数不低于 2、内存不低于 4GB、虚磁盘不小于 40GB 即算达标，显示值略小于 VMware 设置值属正常现象。
+      - lab3_resources.png 应清晰显示 nproc、free -h、lsblk、df -h / 各命令及其输出；CPU 核心数不低于 2、内存不低于 3GB、虚磁盘不小于 40GB 即算达标，显示值略小于 VMware 设置值属正常现象。
       - lab3_mobaxterm.png 应能辨认 MobaXterm 的 SSH 会话窗口（左侧会话栏或远程终端），远程终端为 Linux 提示符并显示 whoami、hostname、hostname -I 的输出；whoami 输出应与报告填写一致。用 Windows 本地 PowerShell/CMD 冒充远程终端、只有连接界面无命令输出均不算完成。
       - lab3_vscode_remote.png 应能辨认 VSCode 窗口左下角的 SSH 远程标识（如 SSH：kali-oslab），已打开远程文件夹，集成终端中有 uname -a 输出的 Linux 内核信息；报告填写的主机别名应与图中一致。
       - 截图必须来自学生本人的 Kali 虚拟机，两张远程连接截图中的 IP 与报告填写的 IP 一致或为同一虚拟机的合理变化；必须由电脑截图功能生成，出现手机拍屏反光、倾斜或关键文字无法辨认时判为不合格。
