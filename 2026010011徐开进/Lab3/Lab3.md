@@ -476,6 +476,7 @@ MobaXterm 提供的是终端，VSCode Remote-SSH 则把整个编辑器“搬”�
 
 1. 按 `Ctrl+Shift+P` 打开命令面板，输入并选择 **Remote-SSH: Open SSH Configuration File**，选择 `C:\Users\你的Windows用户名\.ssh\config`。
 2. 在文件中写入下面内容，把 IP 和用户名换成自己的（与 MobaXterm 用同一套）：
+
 ```text
 Host kali-oslab
     HostName 192.168.x.x
