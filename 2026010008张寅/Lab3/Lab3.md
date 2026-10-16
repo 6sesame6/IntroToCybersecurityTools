@@ -223,13 +223,13 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | |
-| 选择的配置档位 | 最低可用档 / 课程推荐档 / 宽裕档 |
-| 虚拟 CPU 核心数 | |
-| 虚拟内存 | |
-| 虚磁盘容量 | |
-| 根分区可用空间 | |
-| 资源分配是否符合对应档位 | |
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 |16G/8/200G|
+| 选择的配置档位 |课程推荐档|
+| 虚拟 CPU 核心数 |4|
+| 虚拟内存 |3.8Gi|
+| 虚磁盘容量 |80G|
+| 根分区可用空间 |59G|
+| 资源分配是否符合对应档位 |符合|
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -340,13 +340,13 @@ sudo apt update
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 虚拟机 IP 地址 | |
-| 网络模式 | NAT / 其他： |
-| ping `223.5.5.5` 是否成功 | |
-| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 | |
-| 软件源（官方源 / 已换的镜像站） | |
-| `sudo apt update` 是否成功 | |
-| 联网是否合格 | |
+| 虚拟机 IP 地址 |192.168.145.128|
+| 网络模式 |NAT|
+| ping `223.5.5.5` 是否成功 |是|
+| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 |是|
+| 软件源（官方源 / 已换的镜像站） |官方源|
+| `sudo apt update` 是否成功 |是|
+| 联网是否合格 |是|
 
 ![虚拟机联网](imgs/lab3_network.png)
 
@@ -453,11 +453,11 @@ hostname -I
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| Kali 的 IP 地址 | |
-| 登录用的 Kali 用户名 | |
-| 是否登录成功 | |
-| 远程终端里 `whoami` 的输出 | |
-| 远程登录是否合格 | |
+| Kali 的 IP 地址 |192.168.145.128|
+| 登录用的 Kali 用户名 |kali|
+| 是否登录成功 |是|
+| 远程终端里 `whoami` 的输出 |kali|
+| 远程登录是否合格 |是 |
 
 ![MobaXterm 远程登录](imgs/lab3_mobaxterm.png)
 
@@ -508,11 +508,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | |
-| 是否连接成功 | |
-| 能否打开远程文件夹 | |
-| 远程终端里 `uname -a` 的输出 | |
-| Remote-SSH 是否合格 | |
+| 配置的主机别名（如 `kali-oslab`） |kali|
+| 是否连接成功 |是|
+| 能否打开远程文件夹 |能|
+| 远程终端里 `uname -a` 的输出 |Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1+kali1 (2026-05-05) x86_64 GNU/Linux|
+| Remote-SSH 是否合格 |是|
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
