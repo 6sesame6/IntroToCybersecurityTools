@@ -166,7 +166,7 @@
 1. 从第七节官方地址或 **Edge 加载项** 安装 Tampermonkey（油猴）；
 2. 打开 Greasy Fork（<https://greasyfork.org/zh-CN>）；如果访问缓慢，可搜索"greasyfork 镜像"或"greasyfork 加速"使用社区镜像站；
 3. 在 Greasy Fork 上按热度或分类挑一个自己感兴趣的脚本安装并启用；
-4. 再从 **Edge → 设置 → 重置 → 添加应用 → 获取 Microsoft Edge 加载项**（或 Edge 工具栏"扩展"图标 → 管理 → 获取扩展）安装任意一款浏览器插件，如广告拦截、翻译、划词搜索类；
+4. 再从 **Edge 地址栏输入 `edge://extensions` → 页面左下角"获取 Microsoft Edge 扩展"**（或 Edge 工具栏"扩展"图标 → 管理扩展 → 获取扩展）安装任意一款浏览器插件，如广告拦截、翻译、划词搜索类；
 5. 填写下表。
 
 | 项目 | 内容 |
