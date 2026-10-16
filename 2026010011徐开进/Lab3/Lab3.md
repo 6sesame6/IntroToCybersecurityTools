@@ -223,13 +223,13 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | |
-| 选择的配置档位 | 最低可用档 / 课程推荐档 / 宽裕档 |
-| 虚拟 CPU 核心数 | |
-| 虚拟内存 | |
-| 虚磁盘容量 | |
-| 根分区可用空间 | |
-| 资源分配是否符合对应档位 | |
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | 32GB/8核/120G|
+| 选择的配置档位 | 宽裕档 |
+| 虚拟 CPU 核心数 |4 |
+| 虚拟内存 | 3.8Gi|
+| 虚磁盘容量 | 79G|
+| 根分区可用空间 |59G |
+| 资源分配是否符合对应档位 | 符合|
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -340,13 +340,13 @@ sudo apt update
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 虚拟机 IP 地址 | |
-| 网络模式 | NAT / 其他： |
-| ping `223.5.5.5` 是否成功 | |
-| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 | |
-| 软件源（官方源 / 已换的镜像站） | |
-| `sudo apt update` 是否成功 | |
-| 联网是否合格 | |
+| 虚拟机 IP 地址 | 192.168.90.128|
+| 网络模式 | NAT  |
+| ping `223.5.5.5` 是否成功 | 成功|
+| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 | 成功|
+| 软件源（官方源 / 已换的镜像站） |官方源 |
+| `sudo apt update` 是否成功 | 成功|
+| 联网是否合格 |合格 |
 
 ![虚拟机联网](imgs/lab3_network.png)
 
@@ -453,11 +453,11 @@ hostname -I
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| Kali 的 IP 地址 | |
-| 登录用的 Kali 用户名 | |
-| 是否登录成功 | |
-| 远程终端里 `whoami` 的输出 | |
-| 远程登录是否合格 | |
+| Kali 的 IP 地址 |192.168.90.128 |
+| 登录用的 Kali 用户名 |kali |
+| 是否登录成功 |成功 |
+| 远程终端里 `whoami` 的输出 | kali|
+| 远程登录是否合格 | 合格|
 
 ![MobaXterm 远程登录](imgs/lab3_mobaxterm.png)
 
@@ -476,7 +476,6 @@ MobaXterm 提供的是终端，VSCode Remote-SSH 则把整个编辑器“搬”�
 
 1. 按 `Ctrl+Shift+P` 打开命令面板，输入并选择 **Remote-SSH: Open SSH Configuration File**，选择 `C:\Users\你的Windows用户名\.ssh\config`。
 2. 在文件中写入下面内容，把 IP 和用户名换成自己的（与 MobaXterm 用同一套）：
-
 ```text
 Host kali-oslab
     HostName 192.168.x.x
@@ -508,11 +507,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | |
-| 是否连接成功 | |
-| 能否打开远程文件夹 | |
-| 远程终端里 `uname -a` 的输出 | |
-| Remote-SSH 是否合格 | |
+| 配置的主机别名（如 `kali-oslab`） |kali-oslab |
+| 是否连接成功 |连接成功 |
+| 能否打开远程文件夹 |能 |
+| 远程终端里 `uname -a` 的输出 | Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1+kali1 (2026-05-05) x86_64 GNU/Linux|
+| Remote-SSH 是否合格 | 合格|
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
@@ -712,15 +711,15 @@ sudo apt update
 
 | 验收项目 | 合格标准 | 你的结论 |
 | :--- | :--- | :--- |
-| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | |
-| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | |
-| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | |
-| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | |
+| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 是|
+| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 成功|
+| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 |是 |
+| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 |是|
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 |是 |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：
+> 填写：无
 
 ---
 
