@@ -98,7 +98,7 @@ VMware 安装包和 Kali 镜像体积很大，不放在课程仓库中，由教�
 
 ### 检查 CPU 虚拟化
 
-1. 在 Windows 中按 `Ctrl + Shift + Esc` 打开任务管理器。
+1. 在 Windows 中按 `Ctrl + Shift + Esc` 打开任务管理器
 2. 点击 **性能**。
 3. 选择 **CPU**。
 4. 查看右下角是否显示 **虚拟化：已启用**。
