@@ -45,7 +45,9 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: 使用共享审核器审核并处理 PR
-        uses: LiuXiYing/course-pr-reviewer@23fd528a74108702e6d53aacb1ff5fcef7c760b7 # v0.12.0：已合并的重复提交直接说明并关闭
+        # 跟随审核器 main：审核器一发版，本课立即生效（与数据结构课一致）。
+        # 需要临时冻结某个版本时，把下面这行换成该版本的完整 SHA。
+        uses: LiuXiYing/course-pr-reviewer@main
         with:
           config-path: .github/course-review.yml
           students-path: .github/students.yml
