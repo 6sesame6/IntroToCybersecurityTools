@@ -223,13 +223,13 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 |16G/16核/48G |
-| 选择的配置档位 |  课程推荐档 |
-| 虚拟 CPU 核心数 |4 |
-| 虚拟内存 |7.7Gi |
-| 虚磁盘容量 |80.1G |
-| 根分区可用空间 | 59G|
-| 资源分配是否符合对应档位 | 是|
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | 16GB / 16 核 / 48GB（虚拟机所在的 D 盘） |
+| 选择的配置档位 | 最低可用档（宿主机存放盘剩余 48GB，未达到课程推荐档要求的「剩余 80GB 以上」，按“任意一项不满足时，选低一档”的规则取最低可用档） |
+| 虚拟 CPU 核心数 | 4 |
+| 虚拟内存 | 7.7Gi |
+| 虚磁盘容量 | 80.1G |
+| 根分区可用空间 | 59G |
+| 资源分配是否符合对应档位 | 是。4 核 / 7.7Gi / 80.1G 为预装镜像（克隆机）自带配置，未做下调，三项均不低于最低可用档的 2 核 / 4096MB / 40GB，满足本实验「至少 2 核、4GB、40GB」的要求 |
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -362,9 +362,9 @@ sudo apt install -y openssh-server
 
 装完之后让 SSH 服务开机自启并立即启动：
 
-```sudo systemctl enable --now ssh
 ```bash
-
+sudo systemctl enable --now ssh
+```
 
 `enable` 是设置开机自动启动，`--now` 是同时立刻启动，两件事一条命令完成。执行完这一步，22 端口就会进入监听状态。
 
@@ -453,12 +453,11 @@ hostname -I
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| Kali 的 IP 地址 |192.168.255.129
- |
-| 登录用的 Kali 用户名 |kali |
-| 是否登录成功 |是 |
-| 远程终端里 `whoami` 的输出 |kali |
-| 远程登录是否合格 |合格 |
+| Kali 的 IP 地址 | 192.168.255.129 |
+| 登录用的 Kali 用户名 | kali |
+| 是否登录成功 | 是 |
+| 远程终端里 `whoami` 的输出 | kali |
+| 远程登录是否合格 | 合格 |
 
 ![MobaXterm 远程登录](imgs/lab3_mobaxterm.png)
 
@@ -509,11 +508,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | |
-| 是否连接成功 | |
-| 能否打开远程文件夹 | |
-| 远程终端里 `uname -a` 的输出 | |
-| Remote-SSH 是否合格 | |
+| 配置的主机别名（如 `kali-oslab`） | kali-lab |
+| 是否连接成功 | 是 |
+| 能否打开远程文件夹 | 是（已打开远程主目录 `/home/kali`） |
+| 远程终端里 `uname -a` 的输出 | Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1+kali1 (2026-05-05) x86_64 GNU/Linux |
+| Remote-SSH 是否合格 | 合格 |
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
@@ -713,15 +712,19 @@ sudo apt update
 
 | 验收项目 | 合格标准 | 你的结论 |
 | :--- | :--- | :--- |
-| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | |
-| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | |
-| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | |
-| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | |
+| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 合格。IP 为 192.168.255.129，默认路由 192.168.255.2；ping 223.5.5.5 与 ping mirrors.tuna.tsinghua.edu.cn 均 4 个包、0% 丢包 |
+| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格。`sudo apt update` 执行成功，`Get:` 行全部来自 mirrors.ustc.edu.cn（已换国内镜像站），没有 `Err`、`Failed` 或 `Could not resolve` |
+| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格。虚拟 CPU 4 核（`nproc`）、内存 7.7Gi（`free -h`）、虚磁盘 80.1G（`lsblk`）、根分区可用 59G（`df -h /`），三项均达到最低要求 |
+| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格。从 Windows 用 MobaXterm SSH 登录 192.168.255.129，远程终端 `whoami` 输出 kali、`hostname` 输出 kali、`hostname -I` 输出 192.168.255.129 |
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格。VSCode 左下角显示 SSH: kali-lab，已打开远程主目录，集成终端 `uname -a` 输出 Kali 6.19.14 内核信息 |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：
+> 本次实验按文档第一至十五节的顺序完成，虚拟机联网、软件源、CPU/内存/存储、MobaXterm 远程登录、VSCode Remote-SSH 五项验收全部通过，没有遇到导致流程中断的问题。
+>
+> 过程中做的一处调整：按第十五节附录把软件源换成了中国科学技术大学镜像站，之后再执行 `sudo apt update`，下载软件包索引的速度比官方源明显更快，`Get:` 行全部来自 `mirrors.ustc.edu.cn`，没有任何 `Err:` 或 `Failed`。
+>
+> 当前环境可以继续完成后续实验：是。
 
 ---
 
