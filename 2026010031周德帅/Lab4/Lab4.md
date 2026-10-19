@@ -316,6 +316,7 @@ GitHub Student Developer Pack 是 GitHub 面向学生的福利包，包含 GitHu
 
 > QuickLook 和 Microsoft PowerToys 更推荐直接在 Microsoft Store 安装。PotPlayer 官网为韩文站点（服务器在境外，国内可能较慢或打不开），下载入口在页面上方的 Download；打不开就用 Microsoft Store 或其他播放器代替，试用记录里注明即可。
 >
+
 > 上表境外官网在国内多数可以直连，但速度可能较慢；GitHub 上的 QuickLook 安装包下载慢时，直接用 Microsoft Store 版，或用 6.2 提到的 Watt Toolkit 给 GitHub 加速。任何官网打不开都不要改用第三方下载站，先跳过该软件，用其他软件凑满 5 款。
 
 ---
