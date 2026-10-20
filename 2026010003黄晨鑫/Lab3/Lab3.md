@@ -223,13 +223,13 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | |
-| 选择的配置档位 | 最低可用档 / 课程推荐档 / 宽裕档 |
-| 虚拟 CPU 核心数 |4 |
-| 虚拟内存 | 4|
-| 虚磁盘容量 | 80.1|
-| 根分区可用空间 | 79|
-| 资源分配是否符合对应档位 | 是|
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | 16GB / 16 核 / D 盘剩余约 405GB |
+| 选择的配置档位 | 课程推荐档 |
+| 虚拟 CPU 核心数 | 4 |
+| 虚拟内存 | 4096MB（4GB） |
+| 虚磁盘容量 | 80.1GB |
+| 根分区可用空间 | 约 79GB |
+| 资源分配是否符合对应档位 | 是，满足 ≥2 核、≥4GB、≥40GB 的验收下限 |
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -340,11 +340,13 @@ sudo apt update
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| ping `223.5.5.5` 是否成功 | 是|
-| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 |是 |
-| 软件源（官方源 / 已换的镜像站） |官方源|
-| `sudo apt update` 是否成功 |是 |
-| 联网是否合格 |是 |
+| 虚拟机 IP 地址 | 192.168.9.129 |
+| 网络模式 | NAT |
+| ping `223.5.5.5` 是否成功 | 是，4 个包全部返回，0% packet loss |
+| ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 | 是，4 个包全部返回，0% packet loss |
+| 软件源（官方源 / 已换的镜像站） | 已换的镜像站：mirror.njupt.edu.cn |
+| `sudo apt update` 是否成功 | 是，Get 行正常返回，没有 Err 或 Failed |
+| 联网是否合格 | 是 |
 
 ![虚拟机联网](imgs/lab3_network.png)
 
@@ -506,11 +508,11 @@ Host kali-oslab
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 配置的主机别名（如 `kali-oslab`） | kali|
-| 是否连接成功 | 是|
-| 能否打开远程文件夹 | 能|
-| 远程终端里 `uname -a` 的输出 | Linux kali 6.19.14+kali-amd64  #1 PREEMPI_DYNAMIC kali 6.19.14-1=kali1 (2026-05-05) ×86-64 GNU/Linux|
-| Remote-SSH 是否合格 | 是|
+| 配置的主机别名（如 `kali-oslab`） | kali-oslab |
+| 是否连接成功 | 是 |
+| 能否打开远程文件夹 | 能，已打开 `/home/kali` |
+| 远程终端里 `uname -a` 的输出 | `Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1kali1 (2026-05-05) x86_64 GNU/Linux` |
+| Remote-SSH 是否合格 | 是 |
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
@@ -710,15 +712,15 @@ sudo apt update
 
 | 验收项目 | 合格标准 | 你的结论 |
 | :--- | :--- | :--- |
-| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | |
-| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | |
-| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | |
-| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | |
+| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 合格，IP 为 192.168.9.129，有 `default via 192.168.9.2` 默认路由，两个 ping 均 0% packet loss |
+| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格，已换成 mirror.njupt.edu.cn 镜像站，`sudo apt update` 正常完成且无 Err 或 Failed |
+| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格，4 核、4096MB、虚磁盘 80.1GB，均高于验收下限 |
+| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格，SSH 登录 kali@192.168.9.129 成功，远程终端中 whoami 输出 kali |
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格，左下角显示 SSH: kali-oslab，已打开远程文件夹，远程终端 `uname -a` 输出 Kali 内核信息 |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：
+> 遇到的主要问题是使用官方源时 `sudo apt update` 下载很慢，按附录第十五节备份 `sources.list` 后换成 mirror.njupt.edu.cn 镜像站，刷新索引恢复正常，之后 `apt install openssh-server` 也能正常完成。MobaXterm 首次连接时按提示接受了服务器指纹；VSCode Remote-SSH 第一次连接等待 vscode-server 安装约两分钟，之后可以正常打开远程文件夹并执行 `uname -a`。当前 Kali 已能联网，SSH 与 Remote-SSH 均可远程登录，环境可以继续完成后续实验。
 
 ---
 
