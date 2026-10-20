@@ -720,7 +720,15 @@ sudo apt update
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：
+> 填写：搭建过程中主要遇到三处问题。
+>
+> 一是虚拟机 IP 由 VMware NAT 的 DHCP 动态分配，重启后会变化（本次由 `192.168.53.129` 变为 `192.168.53.128`）。远程连接失败时，先回到 Kali 用 `hostname -I` 重新确认当前 IP，再同步修改 `C:\Users\ROG\.ssh\config` 中的 `HostName`。
+>
+> 二是宿主机 `~/.ssh/config` 最初内容有误，Remote-SSH 无法解析主机名；按第十二节步骤 2 重写为 `Host kali-oslab`、`HostName 192.168.53.128`、`User kali`、`Port 22` 后连接正常。
+>
+> 三是 `ip route` 中除 `default via 192.168.53.2 dev eth0` 外还有一条 `192.168.53.0/24 dev eth0 proto kernel scope link`，属于本网段的直连路由，是正常现象，不影响联网。
+>
+> 当前 Kali 虚拟机已能正常启动、联网，SSH 与 VSCode Remote-SSH 均可从 Windows 宿主机远程登录，环境满足后续实验要求，可以继续完成后续实验
 
 ---
 
