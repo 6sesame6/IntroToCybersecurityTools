@@ -223,13 +223,13 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 |15.6G 24 371.5G|
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 | 15.6GB / 24 核 / 371.5GB |
 | 选择的配置档位 | 课程推荐档 |
-| 虚拟 CPU 核心数 |2|
-| 虚拟内存 |7.7G|
-| 虚磁盘容量 |80.1|
-| 根分区可用空间 | 59G|
-| 资源分配是否符合对应档位 |是 |
+| 虚拟 CPU 核心数 | 2 |
+| 虚拟内存 | 8192MB（`free -h` 显示 7.7Gi） |
+| 虚磁盘容量 | 80.1GB |
+| 根分区可用空间 | 59GB |
+| 资源分配是否符合对应档位 | 是（2 核 / 8GB / 80GB，均不低于课程推荐档的 2 核 / 6144MB / 60GB） |
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -712,15 +712,15 @@ sudo apt update
 
 | 验收项目 | 合格标准 | 你的结论 |
 | :--- | :--- | :--- |
-| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | |
-| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | |
-| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | |
-| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | |
+| 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 合格：IP 为 192.168.53.128，`ip route` 有 `default via 192.168.53.2 dev eth0`；`ping 223.5.5.5` 与 `ping mirrors.tuna.tsinghua.edu.cn` 均 4 个包全部返回、0% packet loss |
+| 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格：使用官方源 `http://http.kali.org/kali`（`kali-rolling`），`sudo apt update` 输出 `Hit:1` 并正常结束，没有 `Err` 或 `Failed` |
+| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格：`nproc` 为 2，`free -h` 显示 7.7Gi，虚磁盘 80.1GB，根分区可用 59GB，均不低于 2 核 / 4GB / 40GB 的底线 |
+| MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格：MobaXterm 以 `kali@192.168.53.128` 登录成功，远程终端中 `whoami` 输出 `kali`、`hostname -I` 输出 192.168.53.128 |
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格：通过别名 `kali-oslab` 连接成功，打开了远程主目录 `~`，集成终端中 `uname -a` 输出 Kali 6.19.14 内核信息 |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：搭建过程中主要遇到三处问题。
+> 搭建过程整体顺利，环境已按要求配好，期间主要遇到三处问题。
 >
 > 一是虚拟机 IP 由 VMware NAT 的 DHCP 动态分配，重启后会变化（本次由 `192.168.53.129` 变为 `192.168.53.128`）。远程连接失败时，先回到 Kali 用 `hostname -I` 重新确认当前 IP，再同步修改 `C:\Users\ROG\.ssh\config` 中的 `HostName`。
 >
@@ -728,7 +728,7 @@ sudo apt update
 >
 > 三是 `ip route` 中除 `default via 192.168.53.2 dev eth0` 外还有一条 `192.168.53.0/24 dev eth0 proto kernel scope link`，属于本网段的直连路由，是正常现象，不影响联网。
 >
-> 当前 Kali 虚拟机已能正常启动、联网，SSH 与 VSCode Remote-SSH 均可从 Windows 宿主机远程登录，环境满足后续实验要求，可以继续完成后续实验
+> 另外，Kali 预装镜像默认没有启用 SSH 服务端，执行 `sudo systemctl enable --now ssh` 之后 22 端口才进入监听；软件源沿用官方源，`apt update` 速度可以接受，因此没有更换国内镜像站。当前 Kali 虚拟机已能正常启动、联网，SSH 与 VSCode Remote-SSH 均可从 Windows 宿主机远程登录，环境满足后续实验要求，可以继续完成后续实验。
 
 ---
 
