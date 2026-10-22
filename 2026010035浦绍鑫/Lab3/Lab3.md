@@ -224,12 +224,12 @@ df -h /
 | 项目 | 你的填写内容 |
 | :--- | :--- |
 | 宿主机内存 / CPU 核心 / 存放盘剩余空间 | 16GB / 8 核 / 345GB |
-| 选择的配置档位 | 最低可用档 |
-| 虚拟 CPU 核心数 | 2 核 |
+| 选择的配置档位 | 课程推荐档 |
+| 虚拟 CPU 核心数 | 4 核 |
 | 虚拟内存 | 4096MB（`free -h` 显示 3.8Gi） |
-| 虚磁盘容量 | 60GB（`lsblk` 中 sda 为 60G，根分区 sda2 为 59.5G） |
-| 根分区可用空间 | 50GB（`df -h /` 中 Size 59G、Used 9.4G、Use% 17%） |
-| 资源分配是否符合对应档位 | 是（2 核 / 4096MB / 60GB，满足最低可用档要求；虚磁盘由预装镜像自带，不小于 40GB 即符合课程要求） |
+| 虚磁盘容量 | 80GB（`lsblk` 中 sda 为 80.1G，单分区 sda1 80.1G 挂载到 `/`） |
+| 根分区可用空间 | 58GB（`df -h /` 中 Size 79G、Used 18G、Use% 24%） |
+| 资源分配是否符合对应档位 | 是（4 核 / 4096MB / 80GB，均不低于「至少 2 核、4GB、40GB」的要求） |
 
 ![虚机资源](imgs/lab3_resources.png)
 
@@ -714,7 +714,7 @@ sudo apt update
 | :--- | :--- | :--- |
 | 虚拟机联网 | 具有 IP 和默认路由，IP 联通与 DNS 解析正常 | 合格：IP 为 192.168.171.129，默认路由为 `default via 192.168.171.2`，`ping 223.5.5.5` 与 `ping mirrors.tuna.tsinghua.edu.cn` 各发 4 包均 0% 丢包 |
 | 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） | 合格：使用官方源 `http.kali.org`（仓库代号 `kali-rolling`），`Get:` 全部成功，无 `Err`/`Failed` |
-| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格：2 核 / 4096MB（`free -h` 显示 3.8Gi）/ 60GB 虚磁盘，根分区可用 50GB，按最低可用档配置 |
+| CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格：4 核 / 4096MB（`free -h` 显示 3.8Gi）/ 80GB 虚磁盘，根分区可用 58GB |
 | MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 | 合格：用 IP 192.168.171.129、用户 kali、端口 22 登录成功，远程终端 `whoami` 输出 kali |
 | VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 | 合格：左下角显示 `SSH: kali-oslab`，已打开远程目录，集成终端 `uname -a` 返回 Kali 6.19.14 内核信息 |
 
