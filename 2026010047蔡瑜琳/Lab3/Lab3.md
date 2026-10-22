@@ -223,10 +223,10 @@ df -h /
 
 | 项目 | 你的填写内容 |
 | :--- | :--- |
-| 宿主机内存 / CPU 核心 / 存放盘剩余空间 |16G/24/466G |
+| 宿主机内存 / CPU 核心 / 存放盘剩余空间 |16GB/24核/466GB |
 | 选择的配置档位 |  课程推荐档  |
 | 虚拟 CPU 核心数 | 2 |
-| 虚拟内存 | 5.8Gi|
+| 虚拟内存 | 6144MB|
 | 虚磁盘容量 |80.1G |
 | 根分区可用空间 | 59G|
 | 资源分配是否符合对应档位 |是 |
@@ -344,9 +344,9 @@ sudo apt update
 | 网络模式 | NAT  |
 | ping `223.5.5.5` 是否成功 |是 |
 | ping `mirrors.tuna.tsinghua.edu.cn` 是否成功 |是 |
-| 软件源（官方源 / 已换的镜像站） |中科大镜像源    |
+| 软件源（官方源 / 已换的镜像站） |中科大镜像源   |
 | `sudo apt update` 是否成功 |是 |
-| 联网是否合格 |合格 |
+| 联网是否合格 |是|
 
 ![虚拟机联网](imgs/lab3_network.png)
 
@@ -512,7 +512,7 @@ Host kali-oslab
 | 是否连接成功 |是 |
 | 能否打开远程文件夹 |能 |
 | 远程终端里 `uname -a` 的输出 | Linux kali 6.19.14+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.19.14-1+kali1 (2026-05-05) x86_64 GNU/Linux|
-| Remote-SSH 是否合格 |是 |
+| Remote-SSH 是否合格 | 是 |
 
 ![VSCode Remote-SSH](imgs/lab3_vscode_remote.png)
 
@@ -716,13 +716,11 @@ sudo apt update
 | 软件源 | `sudo apt update` 成功，没有 `Err` 或 `Failed`（使用官方源或国内镜像站均可） |合格 |
 | CPU、内存、存储 | 至少 2 核、4GB、40GB，且与宿主机档位匹配 | 合格|
 | MobaXterm 远程登录 | 从 Windows 用 MobaXterm 能 SSH 登录 Kali 并在远程终端执行命令 |合格 |
-| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 合格| |
+| VSCode Remote-SSH | VSCode 能通过 Remote-SSH 连接 Kali，打开远程文件夹并在远程终端执行命令 |合格 |
 
 简要说明你遇到的问题、解决方法，以及当前环境是否可以继续完成后续实验：
 
-> 填写：遇到的问题：直接关闭MobaXterm，导致VMware虚拟机产生锁文件，弹出虚拟机正在被占用的报错。
- 解决方法：在VMware弹窗点击Take Ownership接管虚拟机所有权，成功解除锁定，正常开机进入Kali。
- 当前环境：全部验收项合格，已创建Lab3-ready基线快照，环境干净稳定，可以继续后续实验。
+> 在搭建虚拟机过程中，遇到过虚拟机网络不通的问题，通过调整虚拟机网卡为NAT模式解决，当前环境稳定，可以继续完成后续实验。
 
 ---
 
