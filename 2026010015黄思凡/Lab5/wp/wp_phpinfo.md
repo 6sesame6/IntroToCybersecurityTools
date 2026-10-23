@@ -11,36 +11,36 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 环境地址 | http://challenge-99ecdf16e13cc2fa.sandbox.ctfhub.com:10800/ |
-| Flag | ctfhub{298c9af106f562f70605bcf9}  |
+| 环境地址 | https://challenge-385bc4ce175453a7e.sandbox.ctfhub.com:10800/phpinfo.php |
+| Flag | ctfhub{b1354ceb7d5d41c94b7eea301} |
 
 ## 解题过程
 
-打开页面后是一个贪吃蛇的游戏，用ctrl+u打开网页源代码后找到flag。除此之外还暴露了前端代码，注释信息
+打开题目地址后直接就是 phpinfo 页面，不需要点任何按钮。按住 Ctrl + F 输入 ctfhub 回车，浏览器会跳到高亮的那一处，正好是 Environment 一节里的 FLAG 变量，值就是 flag。除了 flag，页面还暴露了 Apache 的运行目录、日志目录、运行用户 www-data，以及 PHP 版本 7.3.14 和访问者 IP 等信息。
 
 ## 关键请求/响应
 
 ```http
-<html>
-<head>
-<meta charset="UTF-8"/>
-<title>贪吃蛇</title>
-</head>
+GET /phpinfo.php HTTP/1.1
+Host: challenge-385bc4ce175453a7e.sandbox.ctfhub.com:10800
 
-<body>
-    <canvas id="canvas" width="1000" height="700"></canvas>
-    <div>
-        <input id="switch" type="button" value="開始" onclick="clickSwitch()"></input><br/>
-        <input id="content" type="text" value="0"></input>
-    </div>
-</body>
-<!-- ctfhub{298c9af106f562f70605bcf9} -->
-<script type="text/javascript">
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+（响应体 Environment 一节中定位到的字段）
+Variable              Value
+APACHE_RUN_DIR        /var/run/apache2
+APACHE_LOG_DIR        /var/log/apache2
+APACHE_RUN_USER       www-data
+FLAG                  ctfhub{b1354ceb7d5d41c94b7eea301}
+
+（响应体 PHP Variables 一节）
+$_SERVER['HTTP_HOST']    challenge-385bc4ce175453a7e.sandbox.ctfhub.com:10800
 ```
 
 ## 原理与复盘
 
-phpinfo 页面一般会暴露PHP版本，服务器操作系统，网站物理路径，环境变量，扩展信息等。攻击者利用这些信息手机服务器指纹，查找响应漏洞进行攻击
+phpinfo 页面一般会暴露 PHP 版本、服务器操作系统、网站物理路径、环境变量、扩展信息等。攻击者利用这些信息收集服务器指纹，再查找相应漏洞进行攻击；本次的 flag 就直接写在环境变量里，被 phpinfo 原样打印了出来。
 
 ---
 
@@ -49,4 +49,3 @@ phpinfo 页面一般会暴露PHP版本，服务器操作系统，网站物理路
 ![PHPINFO](../imgs/lab5_phpinfo.png)
 
 > 可以在这份 WP 中另加过程截图；检查时只看指定图片，额外图片不检查。
-
