@@ -449,9 +449,10 @@ assignments:
     required_files:
       - Lab9.md
       - imgs/lab9_gdb.png
+      - imgs/lab9_call_stack.png
       - imgs/lab9_disas.png
       - imgs/lab9_regs.png
-      - imgs/lab9_array.png
+      - imgs/lab9_return.png
     template_metrics:
       enabled: true
       report_file: Lab9.md
@@ -459,31 +460,32 @@ assignments:
       max_file_bytes: 200000
     vision_files:
       - imgs/lab9_gdb.png
+      - imgs/lab9_call_stack.png
       - imgs/lab9_disas.png
       - imgs/lab9_regs.png
-      - imgs/lab9_array.png
+      - imgs/lab9_return.png
     review_points:
       - >-
-        本次只提交 Lab9.md 和四张指定截图共 5 个文件，不提交 string_demo.c、array_demo.c、bomb.c、编译产物或其他文件。模板行数与字符数量检查只针对 Lab9.md，不应用于 C 源码。
+        提交 Lab9.md、一张 CLion 调用栈截图和四张 GDB 截图。模板行数与字符检查只针对报告。姓名和 10 位学号须与登记身份一致，1.1 记录本人的系统与架构。
       - >-
-        Lab9.md 保留模板中的说明、示例、表格和图片引用，只替换指定填写位置。填写位置包括第一节基本信息、2.1 的系统与架构、4.2 寄存器截图说明、4.3 的两轮记录表和简答、5.1 与 5.3 的暂停记录与简答、5.2 的两条指令与循环跳转记录、第六节的阅读记录表。姓名和 10 位学号须与登记身份一致，模板示例中的教师学号不作为本人填写内容。
+        2.7 的两轮记录应来自 Hi/Hi 和 Hi/Ho，包含返回值、条件跳转及其目标、执行跳转后的 rip、预测及实际输出。按实际编译生成的分支结构判断。
       - >-
-        2.1 的系统应为 Linux、架构应为 x86_64；若显示 aarch64，应在报告中说明已由教师安排兼容的 x86-64 环境。4.3 的两轮记录分别来自 Hi 与 Hi、Hi 与 Ho 两次运行，第二轮来自把 expected 改成 Ho 并重新编译后的运行。各填写栏不得留空或保留"（填写）"提示。
+        2.8 四题分别解释入口栈指针与局部变量写入、两个参数寄存器与数组地址、call 压入的返回地址和调用栈、整数返回值落入 same 及分支选择。认可等价写法与本机地址。
       - >-
-        第六节三行阅读记录应填写：两种启动方式分别从哪里读取、指定文件打不开时会怎样；甲、乙各自经历的调用顺序与成功提示；两行用完后哪个阶段还需输入、从哪里读取。接受简短或口语化说明。
-      - >-
-        本次只涉及 GDB 命令行调试、寄存器与数组指针，不要求提交源码或可执行文件，不要求 Windows 侧 CLion 截图。文本审核不因无法看到截图内容而判缺少图片证据，不要求实际运行学生程序。
+        第三部分记录两种输入来源与文件打开失败行为、两行各自的处理顺序与成功提示、下一阶段和后续输入来源。各本人填写栏均已完成。文本审核不因无法看到截图内容而判缺少图片证据。
     vision_review_points:
       - >-
         lab9_gdb.png 应能辨认 GDB 源码调试的命令与输出，即 step 进入 same_text 时显示的两个参数、finish 打印的返回值以及 print same 的结果。只有断点或运行输出、看不到进入函数与返回值的，不算完成。
       - >-
-        lab9_disas.png 应能辨认 disassemble main 命令、输出开头的 Dump of assembler code for function main:，以及目标为 same_text 的那一行 call；指令应为 Intel 写法，寄存器名前没有 %。
+        lab9_call_stack.png 应能辨认 CLion 调试窗口 Frames 面板中从当前帧 D 到 C、B、A、main 的五层调用。允许仅截取调用栈面板。
       - >-
-        lab9_regs.png 应能辨认 x/i $rip 显示的 call ... <same_text>，以及 rdi、rsi 的数值和它们指向的文字；这四条命令必须在 call 之前执行，若截图显示已越过 call 则不算调用前参数。
+        lab9_disas.png 应能辨认 disassemble /s main 命令、输出开头的 Dump of assembler code for function main:，以及目标为 same_text 的那一行 call；指令应为 Intel 写法，寄存器名前没有 %。
       - >-
-        lab9_array.png 应能辨认断点命中的那一行、print p 与 print &numbers[i] 的结果，以及 x/3dw numbers 和 x/12bx numbers 的输出。只有普通运行输出或看不到数组内容的，不算完成。
+        lab9_regs.png 应能辨认 x/i $rip 显示的 call ... <same_text>，以及 rdi、rsi 的数值和它们指向的文字；参数须在 call 之前观察，若截图显示已越过 call 则不算调用前参数。
       - >-
-        四张截图来自本人 Kali 操作，关键文字清晰可辨认，允许不同主题、布局、缩放和界面语言；不使用手机拍屏或网上截图冒充。
+        lab9_return.png 应显示回到 main 后即将写入 same 的指令、eax 的整数返回值，及单步完成后 same 的值和四个字节。允许本机编译产生等价指令。
+      - >-
+        调用栈截图来自本人 CLion 调试，其余四张来自本人 Kali GDB 操作，关键文字清晰可辨认，允许不同主题、布局、缩放和界面语言；不使用手机拍屏或网上截图冒充。
   Lab10:
     enabled: true
     deadline: "2026-12-05T00:00:00+08:00"
