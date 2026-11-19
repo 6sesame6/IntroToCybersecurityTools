@@ -437,3 +437,102 @@ assignments:
         lab8_memory.png 应能辨认 CLion Memory View 中 number 的起始地址、从该地址开始的连续四字节 1a 00 00 00，以及 Variables 或 Watches 中的整数值 26。字节可以跨显示行，允许不同列宽、主题和十六进制大小写；地址与报告应对应。仅有普通运行输出或 Variables 而无内存字节视图不算完成。
       - >-
         四张截图来自本人 Windows CLion 实际操作，允许不同主题、布局、缩放和界面语言，关键内容可辨认即可；项目内源码名 main.c 与提交副本名 lab8_basics.c 不同属正常。不使用手机拍屏或网上截图冒充；循环未换行输出延迟刷新不构成未完成。
+  Lab9:
+    enabled: true
+    deadline: "2026-11-28T00:00:00+08:00"
+    grading:
+      mode: tiered
+      max_points: "10.00"
+    min_nonempty_lines: 0
+    allow_extra_files: false
+    report_template: homework/Lab9/Lab9.md
+    required_files:
+      - Lab9.md
+      - imgs/lab9_gdb.png
+      - imgs/lab9_disas.png
+      - imgs/lab9_regs.png
+      - imgs/lab9_array.png
+    template_metrics:
+      enabled: true
+      report_file: Lab9.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    vision_files:
+      - imgs/lab9_gdb.png
+      - imgs/lab9_disas.png
+      - imgs/lab9_regs.png
+      - imgs/lab9_array.png
+    review_points:
+      - >-
+        本次只提交 Lab9.md 和四张指定截图共 5 个文件，不提交 string_demo.c、array_demo.c、bomb.c、编译产物或其他文件。模板行数与字符数量检查只针对 Lab9.md，不应用于 C 源码。
+      - >-
+        Lab9.md 保留模板中的说明、示例、表格和图片引用，只替换指定填写位置。填写位置包括第一节基本信息、2.1 的系统与架构、4.2 寄存器截图说明、4.3 的两轮记录表和简答、5.1 与 5.3 的暂停记录与简答、5.2 的两条指令与循环跳转记录、第六节的阅读记录表。姓名和 10 位学号须与登记身份一致，模板示例中的教师学号不作为本人填写内容。
+      - >-
+        2.1 的系统应为 Linux、架构应为 x86_64；若显示 aarch64，应在报告中说明已由教师安排兼容的 x86-64 环境。4.3 的两轮记录分别来自 Hi 与 Hi、Hi 与 Ho 两次运行，第二轮来自把 expected 改成 Ho 并重新编译后的运行。各填写栏不得留空或保留"（填写）"提示。
+      - >-
+        第六节三行阅读记录应填写：两种启动方式分别从哪里读取、指定文件打不开时会怎样；甲、乙各自经历的调用顺序与成功提示；两行用完后哪个阶段还需输入、从哪里读取。接受简短或口语化说明。
+      - >-
+        本次只涉及 GDB 命令行调试、寄存器与数组指针，不要求提交源码或可执行文件，不要求 Windows 侧 CLion 截图。文本审核不因无法看到截图内容而判缺少图片证据，不要求实际运行学生程序。
+    vision_review_points:
+      - >-
+        lab9_gdb.png 应能辨认 GDB 源码调试的命令与输出，即 step 进入 same_text 时显示的两个参数、finish 打印的返回值以及 print same 的结果。只有断点或运行输出、看不到进入函数与返回值的，不算完成。
+      - >-
+        lab9_disas.png 应能辨认 disassemble main 命令、输出开头的 Dump of assembler code for function main:，以及目标为 same_text 的那一行 call；指令应为 Intel 写法，寄存器名前没有 %。
+      - >-
+        lab9_regs.png 应能辨认 x/i $rip 显示的 call ... <same_text>，以及 rdi、rsi 的数值和它们指向的文字；这四条命令必须在 call 之前执行，若截图显示已越过 call 则不算调用前参数。
+      - >-
+        lab9_array.png 应能辨认断点命中的那一行、print p 与 print &numbers[i] 的结果，以及 x/3dw numbers 和 x/12bx numbers 的输出。只有普通运行输出或看不到数组内容的，不算完成。
+      - >-
+        四张截图来自本人 Kali 操作，关键文字清晰可辨认，允许不同主题、布局、缩放和界面语言；不使用手机拍屏或网上截图冒充。
+  Lab10:
+    enabled: true
+    deadline: "2026-12-05T00:00:00+08:00"
+    grading:
+      mode: tiered
+      max_points: "10.00"
+    min_nonempty_lines: 0
+    allow_extra_files: false
+    report_template: homework/Lab10/Lab10.md
+    required_files:
+      - Lab10.md
+      - answers.txt
+      - imgs/lab10_input.png
+      - imgs/lab10_p1_args.png
+      - imgs/lab10_p1_fail.png
+      - imgs/lab10_p2_parse.png
+      - imgs/lab10_pass.png
+    template_metrics:
+      enabled: true
+      report_file: Lab10.md
+      characters: ['#', '-', '*', '`', '|', '>']
+      max_file_bytes: 200000
+    vision_files:
+      - imgs/lab10_input.png
+      - imgs/lab10_p1_args.png
+      - imgs/lab10_p1_fail.png
+      - imgs/lab10_p2_parse.png
+      - imgs/lab10_pass.png
+    review_points:
+      - >-
+        本次只提交 Lab10.md、answers.txt 和五张指定截图共 7 个文件，不提交 bomb 可执行文件、README、GDB 会话记录、命令历史或其他文件。模板行数与字符数量检查只针对 Lab10.md，不应用于 answers.txt。
+      - >-
+        Lab10.md 保留模板中的说明、示例、表格和图片引用，只替换指定填写位置。填写位置包括第一节基本信息、2.1 校验和、3.1 的三条指令与输入读数、3.2 的两串文字、3.3 的跳转记录与简答、3.4 核对、4.2 的格式串与两个简答、4.3 的六个数与记录表、4.4 与 4.5 的记录表、4.6 的两问简答、C 循环与逐项表。姓名和 10 位学号须与登记身份一致，模板示例中的教师学号不作为本人填写内容。
+      - >-
+        answers.txt 应恰好两行：第一行是阶段 1 的文字，第二行是阶段 2 的六个数（六个以空格分隔的十进制整数）。不得为空、不得保留"（填写）"等占位符、不得缺少换行。文本审核核对行数和形式，不逐字核对答案正确性；答案是否推导正确由报告记录和截图综合判断。
+      - >-
+        试探输入必须来自本人学号：阶段 1 输入本人 10 位学号；阶段 2 第一次试探第一个数为本人学号前四位、后五个数为本人学号最后五位每一位加 10；第二次试探只把第一个数换成推出的值、后五个不变。报告填写的试探数与本人学号须对应，不能用手册示例或其他同学的学号。
+      - >-
+        4.6 的两问简答、C 循环和逐项表应填写，不得留空或保留"（填写）"提示；还原的循环应体现先检查第一项、再逐项检查后五项的结构，接受等价写法。本次只要求拆前两个阶段，不要求第三阶段及以后的内容。
+    vision_review_points:
+      - >-
+        lab10_input.png 应能辨认 x/s $rdi 命令及其输出，输出内容应为本人 10 位学号。截图中的试探输入须为本人学号，与 PR 登记身份对应；出现手册示例学号或其他同学学号时判为不合格。
+      - >-
+        lab10_p1_args.png 应能辨认 x/s $rdi 和 x/s $rsi 两条命令，以及它们读出的两串文字（本人学号和程序的比较对象）；应在 call strings_not_equal 之前执行。
+      - >-
+        lab10_p1_fail.png 应能辨认 print $eax 的输出，以及 x/i $rip 显示失败分支上的 call ... <explode_bomb>。
+      - >-
+        lab10_p2_parse.png 应能辨认 x/6dw $rsp 命令及其输出，输出应显示本人学号拆出的六个数（与报告填写的试探数对应）。
+      - >-
+        lab10_pass.png 应能辨认两条成功提示（Phase 1 defused... 和 That's number 2...），分别对应两个阶段的通过。
+      - >-
+        五张截图来自本人 Kali 操作，关键文字清晰可辨认，允许不同主题、布局、缩放和界面语言；不使用手机拍屏或网上截图冒充。仓库公开，截图中的试探输入须为本人学号，不得照搬先提交同学的截图。
