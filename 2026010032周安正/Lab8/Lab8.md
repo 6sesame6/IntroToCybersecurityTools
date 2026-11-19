@@ -372,7 +372,7 @@ Memory View 的操作入口与地址定位方式可参考 [CLion 官方说明](h
 
 无需将地址本身转成十进制，也不要求分析相邻的其他内存。根据上方本人截图，用一句话把实际地址、从低地址到高地址的四个字节、对应的十六进制整数和十进制值连起来，并说明是否与调试窗口一致。
 
-> 本人内存解释：（填写一句话，地址以本次截图为准。）
+> 本人内存解释：本人截图中 `&number` 的实际地址为 `0x00000000005ffe5c`，从该地址开始由低地址到高地址依次读出四个字节为 `1a 00 00 00`，按小端序组合成十六进制整数 `0x0000001a`，即十进制 26，与调试窗口 Variables 中显示的 `number = 26` 完全一致。
 
 ## 八、第六步：在 Kali 中编译并运行同一份 C 文件
 
@@ -443,10 +443,30 @@ after: number = 26, *p = 26
 运行结束后，直接粘贴本人 `uname -m`、`gcc`、`file` 和 `./lab8_basics` 的命令及输出，保留六行程序输出。编译成功没有输出时，保留命令即可，不截图，也不再填写同样内容的表格。
 
 ```text
-（粘贴本人 Kali 编译运行的终端记录）
+$ mkdir -p ~/Lab8
+$ cd ~/Lab8
+$ pwd
+/home/kali/Lab8
+$ ls -l
+total 12
+-rwxrw-rw- 1 kali kali 765 Nov 19 07:01 lab8_basics.c
+$ uname -m
+x86_64
+$ gcc -std=c11 -Wall -Wextra -o lab8_basics lab8_basics.c
+$ file lab8_basics
+lab8_basics: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked,
+interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=3f9820bf7ddd9c4e1e4d3ef9b1f39d36eb9eef5c,
+for GNU/Linux 3.2.0, not stripped
+$ ./lab8_basics
+Student ID: 2026010032
+number >= 5
+Loop ID: 2026010032
+sum = 4
+before: number = 7, *p = 7
+after: number = 26, *p = 26
 ```
 
-> 本人核对：与 CLion 输出是否一致？如出现警告、错误或结果不同，简述处理方法；正常则写“编译无警告或错误，输出一致”。
+> 本人核对：编译无警告或错误（`gcc` 执行后没有任何输出），`file` 显示 ELF 64-bit、x86-64，运行输出的六行内容与 CLion 中完全一致（学号 `2026010032`、`sum = 4`、`*p` 前后为 7 和 26）。
 
 若输出与 CLion 不同，先确认 `~/Lab8/lab8_basics.c` 是最新版本，再重新编译；不要在旧可执行文件上反复运行。
 
