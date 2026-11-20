@@ -7,7 +7,7 @@ int add(int x, int y) {
 int main(void) {
     printf("Student ID: 2026010015\n");
     int number = 7;
-    int student_id[10] = {2, 0, 2, 6, 0, 1, 0, 0, 1,5};
+    int student_id[10] = {2, 0, 2, 6, 0, 1, 0, 0, 1, 5};
     if (number >= 5) {
         printf("number >= 5\n");
     } else {
