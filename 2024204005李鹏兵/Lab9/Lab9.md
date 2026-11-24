@@ -17,16 +17,10 @@ uname -s
 uname -m
 pwd
 sudo apt update
-sudo apt install -y gcc gdb
+sudo apt install -y gcc 
 mkdir -p ~/Lab9
 cd ~/Lab9
 ```
-
-
-
-
-
-
 
 系统应为 `Linux`，架构应为 `x86_64`。`~` 是用户主目录，`mkdir -p` 创建目录，`cd` 切换目录，`pwd` 显示当前位置。后续实验使用固定目录，避免找错文件。编译和调试不使用 `sudo`。
 
