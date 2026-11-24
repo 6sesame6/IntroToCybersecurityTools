@@ -501,44 +501,27 @@ assignments:
     report_template: homework/Lab10/Lab10.md
     required_files:
       - Lab10.md
-      - answers.txt
-      - imgs/lab10_input.png
-      - imgs/lab10_p1_args.png
-      - imgs/lab10_p1_fail.png
-      - imgs/lab10_p2_parse.png
-      - imgs/lab10_pass.png
+      - imgs/lab10_breakpoint.png
+      - imgs/lab10_branch.png
+      - imgs/lab10_phase1.png
     template_metrics:
       enabled: true
       report_file: Lab10.md
       characters: ['#', '-', '*', '`', '|', '>']
       max_file_bytes: 200000
     vision_files:
-      - imgs/lab10_input.png
-      - imgs/lab10_p1_args.png
-      - imgs/lab10_p1_fail.png
-      - imgs/lab10_p2_parse.png
-      - imgs/lab10_pass.png
+      - imgs/lab10_breakpoint.png
+      - imgs/lab10_branch.png
+      - imgs/lab10_phase1.png
     review_points:
       - >-
-        本次只提交 Lab10.md、answers.txt 和五张指定截图共 7 个文件，不提交 bomb 可执行文件、README、GDB 会话记录、命令历史或其他文件。模板行数与字符数量检查只针对 Lab10.md，不应用于 answers.txt。
+        姓名和 10 位学号与登记身份一致。报告保留模板和图片引用，填写本人实验记录。
       - >-
-        Lab10.md 保留模板中的说明、示例、表格和图片引用，只替换指定填写位置。填写位置包括第一节基本信息、2.1 校验和、3.1 的三条指令与输入读数、3.2 的两串文字、3.3 的跳转记录与简答、3.4 核对、4.2 的格式串与两个简答、4.3 的六个数与记录表、4.4 与 4.5 的记录表、4.6 的两问简答、C 循环与逐项表。姓名和 10 位学号须与登记身份一致，模板示例中的教师学号不作为本人填写内容。
-      - >-
-        answers.txt 应恰好两行：第一行是阶段 1 的文字，第二行是阶段 2 的六个数（六个以空格分隔的十进制整数）。不得为空、不得保留"（填写）"等占位符、不得缺少换行。文本审核核对行数和形式，不逐字核对答案正确性；答案是否推导正确由报告记录和截图综合判断。
-      - >-
-        试探输入必须来自本人学号：阶段 1 输入本人 10 位学号；阶段 2 第一次试探第一个数为本人学号前四位、后五个数为本人学号最后五位每一位加 10；第二次试探只把第一个数换成推出的值、后五个不变。报告填写的试探数与本人学号须对应，不能用手册示例或其他同学的学号。
-      - >-
-        4.6 的两问简答、C 循环和逐项表应填写，不得留空或保留"（填写）"提示；还原的循环应体现先检查第一项、再逐项检查后五项的结构，接受等价写法。本次只要求拆前两个阶段，不要求第三阶段及以后的内容。
+        本人解释能指出第一关的两项比较数据分别来自哪里，结合实际比较结果和条件跳转说明通过路径。允许用数据来源描述字符串，接受等价表述。
     vision_review_points:
       - >-
-        lab10_input.png 应能辨认 x/s $rdi 命令及其输出，输出内容应为本人 10 位学号。截图中的试探输入须为本人学号，与 PR 登记身份对应；出现手册示例学号或其他同学学号时判为不合格。
+        lab10_breakpoint.png 显示本人输入的测试文字，以及 GDB 命中 phase_1 断点的提示。
       - >-
-        lab10_p1_args.png 应能辨认 x/s $rdi 和 x/s $rsi 两条命令，以及它们读出的两串文字（本人学号和程序的比较对象）；应在 call strings_not_equal 之前执行。
+        lab10_branch.png 显示比较函数返回后用于解释分支的一项实际读数，以及对应的条件跳转指令。接受不同的 GDB 查看命令和等价数值表示。
       - >-
-        lab10_p1_fail.png 应能辨认 print $eax 的输出，以及 x/i $rip 显示失败分支上的 call ... <explode_bomb>。
-      - >-
-        lab10_p2_parse.png 应能辨认 x/6dw $rsp 命令及其输出，输出应显示本人学号拆出的六个数（与报告填写的试探数对应）。
-      - >-
-        lab10_pass.png 应能辨认两条成功提示（Phase 1 defused... 和 That's number 2...），分别对应两个阶段的通过。
-      - >-
-        五张截图来自本人 Kali 操作，关键文字清晰可辨认，允许不同主题、布局、缩放和界面语言；不使用手机拍屏或网上截图冒充。仓库公开，截图中的试探输入须为本人学号，不得照搬先提交同学的截图。
+        lab10_phase1.png 显示继续运行的 GDB 命令（含简写）和第一关通过提示。三张图均来自本人 Kali GDB 操作，关键文字清晰即可，允许不同终端布局。
