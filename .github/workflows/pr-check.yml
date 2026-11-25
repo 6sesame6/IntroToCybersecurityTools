@@ -5,7 +5,7 @@ on:
   # 安全边界：只读取事件元数据，禁止检出或执行学生 PR 中的任何内容。
   # 使用受信任默认分支的工作流，使 fork PR 无需教师逐次批准。
   pull_request_target:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
 
 permissions:
   contents: read
@@ -36,7 +36,7 @@ jobs:
               // 这两种事件由推送代码触发，updated_at 就是本次推送的服务器时间。
               eventAt = pr.updated_at;
             } else {
-              // reopened / edited 不改变内容，取同一 head_sha 最早一次触发本工作流的时间，
+              // reopened / edited / ready_for_review 不改变内容，取同一 head_sha 最早一次触发本工作流的时间，
               // 避免"截止后推送 → 关闭 → 重开或改标题"绕过超时判定。
               const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
                 owner: context.repo.owner,
