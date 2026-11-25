@@ -4,7 +4,7 @@
 
 在课程仓库本人的 `学号姓名/` 下创建 `Lab9/imgs/`，复制本手册到个人 `Lab9/`，在副本中填写本人记录。最终提交**填写后的报告、一张 CLion 调用栈截图和四张 GDB 截图，共 6 个文件**。截图按操作处给出的文件名保存，完整目录树见文末“文件提交与截止时间”。
 
-> 本人姓名、10 位学号：（填写）
+> 本人姓名、10 位学号：曹开钰、2026010034
 
 ## 一、用 GDB 调试字符串程序
 
@@ -26,7 +26,7 @@ cd ~/Lab9
 
 若显示 `aarch64`，应由教师准备兼容的 x86-64 Linux 环境；不能将本手册的寄存器和指令直接套在 ARM 程序上。
 
-> 本人系统与架构：（填写 `uname -s` 和 `uname -m` 的输出）
+> 本人系统与架构：`uname -s` 输出 `Linux`，`uname -m` 输出 `x86_64`
 
 将 Lab8 6.4 已学习的 [string_demo.c](../../homework/Lab9/string_demo.c) 放入 Kali 的 `~/Lab9/`，确认 `input`、`expected` 均为 `"Hi"`。复制方式与 Lab8 第六步相同，只是文件换成 `string_demo.c`；编译时增加 `-g -O0` 以便调试。使用 Remote-SSH 时在远程文件夹中创建该文件并复制给定源码即可。也可以在 **Windows Git Bash 的课程仓库根目录**执行，替换用户名及 IP：
 
@@ -660,26 +660,26 @@ print &expected[0]
 
 | 本人运行 | same_text 返回时的 eax | 条件跳转指令和目标地址 | 执行跳转后的 rip | 预测输出 / 实际输出 |
 | --- | --- | --- | --- | --- |
-| Hi 与 Hi | （填写） | （填写） | （填写） | （填写） |
-| Hi 与 Ho | （填写） | （填写） | （填写） | （填写） |
+| Hi 与 Hi | 1 | `je 0x5555555551b1 <main+54>`，目标 `0x5555555551c4 <main+73>` | `0x5555555551b3`（main+56），ZF=0，未跳转 | 预测 same / 实际输出 same |
+| Hi 与 Ho | 0 | `je 0x5555555551b1 <main+54>`，目标 `0x5555555551c4 <main+73>` | `0x5555555551c4`（main+73），ZF=1，跳转 | 预测 different / 实际输出 different |
 
 ### 2.8 汇编读图题
 
 1. 如果 main 入口的 rsp 为 `0x2018`，执行前三条指令后，rbp 和 rsp 各是多少？旧 rbp 存在哪个地址开始的 8 字节中？哪条指令首次给 input 写入了已知内容？
 
-   > 本人推算：执行完前三条指令后， rbp = 0x2010 ， rsp = 0x2000 ；旧rbp的值存放在 0x2010 起始的8字节中； call read_line 返回后的mov指令，首次将输入input的地址送入寄存器
+   > 本人推算：`push rbp` 先把 rsp 从 `0x2018` 减到 `0x2010`，并把旧 rbp 写入 `0x2010`～`0x2017`；`mov rbp,rsp` 使 rbp = `0x2010`；`sub rsp,0x10` 再使 rsp = `0x2000`。所以执行完前三条指令后 rbp = `0x2010`、rsp = `0x2000`，旧 rbp 保存在 `0x2010` 开始的 8 字节中。首次给 input 写入已知内容的是第 4 条 `mov WORD PTR [rbp-0x7],0x6948`，它把 `H`、`i` 的编码 `0x48`、`0x69` 写入 `rbp-7` 起的两个字节。
 
 2. 两个参数用 `x/s` 读出来都是 Hi。根据本人的寄存器截图，写出 rdi 与 rsi 各自对应的数组首地址，并指出分别是哪条指令把地址放进参数寄存器的。
 
-   > 本人解释：rdi 存放输入字符串“Hi”的首地址，由read_line返回后mov %rax, %rdi送入； rsi 存放程序内置密码“Hi”的首地址，由立即数mov指令送入
+   > 本人解释：rdi = `0x7ffffffffe129`，即 `&input[0]`，由第 11 条 `mov rdi,rax` 把 `lea rax,[rbp-0x7]` 算出的地址送入；rsi = `0x7ffffffffe126`，即 `&expected[0]`，由第 10 条 `mov rsi,rdx` 把 `lea rdx,[rbp-0xa]` 算出的地址送入。两条都是寄存器之间的 mov，不是立即数。
 
 3. 在 2.6 的 `si` 之后，栈顶的 8 字节按整数读出来是多少？它和 `x/2i $rip` 先前显示的哪一行对应？结合 `bt` 解释从谁返回到谁，以及 ret 怎样找到下一条指令。
 
-   > 本人观察：rsi之后栈上8字节是phase_1的返回地址，对应 x/21 $rip 中phase_1结束ret的目标地址；bt回溯栈帧，ret指令把这个返回地址加载到rip，程序回到main函数继续执行
+   > 本人观察：执行 `si` 进入 same_text 后，`x/gx $rsp` 读到的 8 字节是 `0x00005555555551aa`，它正是先前 `x/2i $rip` 第二行 `0x5555555551aa <main+47>`（call 的下一条指令）的地址。`bt` 显示 `#0 same_text`、`#1 main`，说明从 same_text 返回 main；`ret` 把这个栈顶地址装入 rip、rsp 加 8，CPU 便从 main+47 继续执行。
 
 4. 两串相同时，为什么 `strcmp` 返回 0，而回到 main 时 eax 是 1？结合返回截图指出写入 same 的指令、写入宽度和写入后的四个字节。再对照两轮记录，解释哪一轮的 je 跳走了。
 
-   > 本人解释：strcmp两串相等返回0，strings_not_equal返回0；test指令设置零标志ZF=1，je条件满足，跳转到same标签，跳过引爆炸弹的代码
+   > 本人解释：两串相同时 strcmp 返回 0，而 same_text 返回的是表达式 `result == 0` 的值，所以返回 1，经 eax 交回 main。返回后 `x/i $rip` 指向 `mov DWORD PTR [rbp-0x4],eax`（main+47），`DWORD PTR` 表示写 4 字节，单步后 `x/4bx &same` 读到 `01 00 00 00`。第一轮 same = 1，cmp 1 与 0 后 ZF = 0，je 不跳，rip 为 +56，输出 same；第二轮 same = 0，cmp 后 ZF = 1，je 跳到 +73，进入 else 输出 different。
 
 ## 三、阅读 bomb.c 的主流程
 
@@ -693,12 +693,9 @@ print &expected[0]
 
 | 阅读记录 | 本人解释 |
 | :--- | :--- |
-| 两种启动方式分别从哪里读取？指定文件打不开时会怎样？ | infile = stdin ，从键盘标准输入读取；
- ./bomb answers.txt （带文件名参数）： infile = fopen(argv[1], "r") ，优先从answers.txt读取；
-文件打开失败，执行 printf("Couldn't open %s\n", argv[1]); exit(8); ，打印提示并退出。 |
-| 写出甲、乙各自经历的调用顺序，以及相应的成功提示。 | 甲： read_line()  →  phase_1(input)  →  phase_defused() ，打印成功提示“Phase 1 defused. How about the next one?”
-乙：再次执行 read_line()  →  phase_2(input)  →  phase_defused() ，打印phase2通关提示。 |
-| 两行用完后，哪个阶段还需要输入？从哪里读取？ | 接下来是 phase_3 还需要输入；文件内容已经读完，自动切换回 stdin （键盘）等待手动输入 |
+| 两种启动方式分别从哪里读取？指定文件打不开时会怎样？ | `./bomb`：`argc == 1`，`infile = stdin`，从键盘标准输入逐行读。`./bomb answers.txt`：`argc == 2`，`infile = fopen(argv[1], "r")`，从 answers.txt 读；文件打不开时执行 `printf("%s: Error: Couldn't open %s\n", argv[0], argv[1]);` 并 `exit(8);`。 |
+| 写出甲、乙各自经历的调用顺序，以及相应的成功提示。 | 甲：`input = read_line();` → `phase_1(input);` → `phase_defused();` → `printf("Phase 1 defused. How about the next one?\n");`。乙：第 68 行再次 `input = read_line();` → `phase_2(input);` → `phase_defused();` → `printf("That's number 2.  Keep going!\n");`。 |
+| 两行用完后，哪个阶段还需要输入？从哪里读取？ | 第二条成功提示之后的下一条 `read_line()`（第 74 行）属于 `phase_3`。answers.txt 已读到末尾，按第 40～41 行注释，`read_line()` 在文件末尾后把 `infile` 改为 stdin，所以程序回到键盘等待第三行输入，再由 `phase_3(input);` 检查。 |
 
 ### 文件提交与截止时间
 
