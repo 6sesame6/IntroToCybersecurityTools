@@ -671,9 +671,15 @@ print &expected[0]
 
    > 本人推算：main 入口 `rsp = 0x2018`。第 1 条 `push rbp` 把 rsp 先减 8，变为 `rsp = 0x2010`，旧 rbp 保存在 `0x2010～0x2017` 这 8 字节中。第 2 条 `mov rbp,rsp` 使 `rbp = 0x2010`。第 3 条 `sub rsp,0x10` 使 `rsp = 0x2010 - 0x10 = 0x2000`（rbp 不变，仍为 0x2010）。首次给 input 写入已知内容的是第 4 条 `mov WORD PTR [rbp-0x7],0x6948`：目的地址 `0x2010-7 = 0x2009`，小端序写入 `48 69`，即 `'H'`、`'i'`；结束符由下一条 `mov BYTE PTR [rbp-0x5],0x0` 补上。
 
+2. 两个参数用 `x/s` 读出来都是 Hi。根据本人的寄存器截图，写出 rdi 与 rsi 各自对应的数组首地址，并指出分别是哪条指令把地址放进参数寄存器的。
+
    > 本人解释：按调用约定，第一个指针参数放 rdi，第二个放 rsi。`lab9_regs.png` 中 `x/s $rdi` 与 `x/s $rsi` 都显示 "Hi"，但地址不同：`rdi = &input[0] = 0x00007ffffffddd39`，`rsi = &expected[0] = 0x00007ffffffddd36`（与 `print &input[0]`、`print &expected[0]` 的输出逐一对应）。`left` 由 `lea rax,[rbp-0x7]` 先算出 input 首地址、再经 `mov rdi,rax` 传入；`right` 由 `lea rdx,[rbp-0xa]` 先算出 expected 首地址、再经 `mov rsi,rdx` 传入。两处 `x/s` 读到相同文字，是因为两个不同地址处的字节序列都是 `48 69 00`。
 
+3. 在 2.6 的 `si` 之后，栈顶的 8 字节按整数读出来是多少？它和 `x/2i $rip` 先前显示的哪一行对应？结合 `bt` 解释从谁返回到谁，以及 ret 怎样找到下一条指令。
+
    > 本人观察：在 call 处 `x/2i $rip` 的第一行是 `call ... <same_text>`，第二行是 `0x00005555555551aa <main+47>: mov DWORD PTR [rbp-0x4],eax`（示例地址）。执行 `si` 进入 same_text 后，`x/gx $rsp` 读到的 8 字节按整数读出就是 `0x00005555555551aa`，与刚才 `x/2i $rip` 的第二行相同，即 call 压入的返回地址。`bt` 显示栈顶帧是 same_text、下一帧是等待它返回的 main，说明控制流是 main → same_text，返回时要回到 main。call 做两件事：压入返回地址并把 rip 转到被调函数入口；same_text 执行 ret 时从栈顶取回这个地址写入 rip，于是 main 从 +47 继续执行，`rsp` 同时回退 8 字节。
+
+4. 两串相同时，为什么 `strcmp` 返回 0，而回到 main 时 eax 是 1？结合返回截图指出写入 same 的指令、写入宽度和写入后的四个字节。再对照两轮记录，解释哪一轮的 je 跳走了。
 
    > 本人解释：`strcmp` 相等时按约定返回 0，`same_text` 中的 `return result == 0;` 把“0 等于 0”这个真值转换成 int 1，经 eax 交回 main，所以返回截图里 `finish` 显示 `Value returned is 1`、`print $eax` 为 1。写回局部变量的指令是 `0x00005555555551aa <+47>: mov DWORD PTR [rbp-0x4],eax`，写入宽度为 DWORD（4 字节），对应 `&same`；`x/4bx &same` 从低地址到高地址为 `01 00 00 00`（小端序），所以 `print same` 显示 1。对照两轮记录：Hi 与 Hi 时 eax=1，`cmp [rbp-0x4],0x0` 得 1−0≠0，ZF=0，`je` 不跳，走 same；Hi 与 Ho 时 `strcmp` 返回非 0，`result == 0` 为假，eax=0，`cmp` 得 0，ZF=1，`je` 跳到 else 输出 different。因此第二轮（Hi 与 Ho）的 je 跳走了。
 
