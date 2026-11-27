@@ -524,4 +524,4 @@ assignments:
       - >-
         lab10_branch.png 显示比较函数返回后用于解释分支的一项实际读数，以及对应的条件跳转指令。接受不同的 GDB 查看命令和等价数值表示。
       - >-
-        lab10_phase1.png 显示继续运行的 GDB 命令（含简写）和第一关通过提示。三张图均来自本人 Kali GDB 操作，关键文字清晰即可，允许不同终端布局。
+        lab10_phase1.png 显示继续运行的 GDB 命令（含简写）和第一关通过提示 Phase 1 defused. How about the next one?，且不能出现 BOOM!!! 或 The bomb has blown up. 等爆炸提示；通过后程序停在等待第二关输入的状态、未返回 (gdb) 提示符属正常现象。三张图均来自本人 Kali GDB 操作，关键文字清晰即可，允许不同终端布局。
